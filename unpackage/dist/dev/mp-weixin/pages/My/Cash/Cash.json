@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "提现",
+  "usingComponents": {
+    "passkeyborad": "/components/yzc-paykeyboard/yzc-paykeyboard"
+  }
+}

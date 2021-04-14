@@ -1,0 +1,254 @@
+
+page{
+		width: 100%;
+		background-color: #fff;
+}
+/* 去掉刘海 */
+.status_bar {
+
+	height: 25px;
+
+	width: 100%;
+	padding-top: 60rpx;
+}
+/* 导航栏 */
+.navBar{
+	width: 100%;
+	height: 80rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	padding: 0 30rpx;
+}
+.back{
+	width: 42rpx;
+	height: 42rpx;
+}
+.title{
+	font-size: 36rpx;
+	color: #333333;
+	font-weight: 700;
+}
+/* 视频展示 */
+.videoBox{
+	width: 300rpx;
+	height: 245rpx;
+}
+.levelLayout{
+	-webkit-box-orient: horizontal !important;
+	-webkit-box-direction: normal !important;
+	-webkit-flex-direction: row !important;
+	        flex-direction: row !important;
+	-webkit-box-pack: justify !important;
+	-webkit-justify-content: space-between !important;
+	        justify-content: space-between !important;
+}
+.blackBox{
+	width: 33.33%;
+	height: 100%;
+	background-color: #00aaff;
+}
+.video{
+	width: 33.33%;
+	height: 100%;
+}
+.hintTitle{
+	height: 50%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	padding: 0 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.inpBox{
+	
+	padding: 0 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.inpTxt{
+	margin-left: 24rpx;
+	margin-right: 24rpx;
+	height: 233rpx;
+	
+	-webkit-border-radius: 16rpx;
+	
+	        border-radius: 16rpx;
+	background: #F3F4F5;
+	font-size: 30rpx;
+	color: #333;
+	padding: 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.inpTxt2{
+	margin-top: 24rpx;
+	margin-left: 24rpx;
+	margin-right: 24rpx;
+	height: 157rpx;
+	
+	-webkit-border-radius: 16rpx;
+	
+	        border-radius: 16rpx;
+	background: #F3F4F5;
+	font-size: 30rpx;
+	color: #333;
+	padding: 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+/* 标签 */
+.tagBox{
+	height: 300rpx;
+	margin-top: 20rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.tagHint{
+	width: 30%;
+	height:100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	padding-left: 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.tagHintTxt{
+	font-size: 38rpx;
+	color: #333;
+	font-weight: 600;
+}
+.tagMinBox{
+	width: 70%;
+	height: 100%;
+	border-left: 1rpx dashed #efefef;
+	padding: 10rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: start;
+	-webkit-align-items: flex-start;
+	        align-items: flex-start;
+	-webkit-box-pack: start;
+	-webkit-justify-content: start;
+	        justify-content: start;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+}
+.tagItemBox{
+	margin-top: 10rpx;
+	height: 56rpx;
+	background: #eee;
+	-webkit-border-radius: 4rpx;
+	        border-radius: 4rpx;
+	font-size: 26rpx;
+	color: #333;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	text-align: center;
+	line-height: 56rpx;
+	
+	margin-left: 24rpx;
+	padding: 0 34rpx;
+}
+.tagItemBox2{
+	margin-top: 10rpx;
+	height: 56rpx;
+	background:#FFECE3;
+	-webkit-border-radius: 4rpx;
+	        border-radius: 4rpx;
+	font-size: 26rpx;
+	color: #FF6010;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	text-align: center;
+	line-height: 56rpx;
+	
+	margin-left: 24rpx;
+	padding: 0 34rpx;
+}
+.addTagSuccess{
+	font-size: 24rpx;
+	color: #FFFFFF;
+	display: inline-block;
+	width: 100rpx;
+	height: 50rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
+	background-color: #2695FA;
+	text-align: center;
+	line-height: 50rpx;
+}
+/* 发布按钮 */
+.btnBox{
+	text-align: center;
+	margin-top: 76rpx;
+	line-height: 80rpx;
+	margin-left: 75rpx;
+	margin-right: 75rpx;
+	/* width: 600rpx; */
+	height: 80rpx;
+	background: -webkit-gradient(linear, left top, right top, from(#FF7085), to(#FF5837));
+	background: -webkit-linear-gradient(left, #FF7085 0%, #FF5837 100%);
+	background: linear-gradient(90deg, #FF7085 0%, #FF5837 100%);
+	-webkit-border-radius:40px;
+	        border-radius:40px;
+	font-size: 36rpx;
+	color: #fff;
+	margin-bottom: 50rpx;
+}
+.btn{
+	display: inline-block;
+	width: 90%;
+	height: 100%;
+	font-size: 32rpx;
+	color: #FFFFFF;
+	text-align: center;
+	line-height: 80rpx;
+	background-color: #1D99FA;
+}
+

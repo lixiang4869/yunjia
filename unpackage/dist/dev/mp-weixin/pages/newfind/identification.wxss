@@ -1,0 +1,121 @@
+
+.hint{
+	margin: 30rpx 0rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.inpForm{
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	padding: 0rpx 20rpx;
+}
+.item{
+	border-bottom: 1rpx solid rgba(244,244,244,1);
+	height: 111rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.inpHint{
+	color: #333333;
+	font-size: 30rpx;
+	font-weight: 700;
+}
+.inp{
+	text-align: right;
+	font-size: 30rpx;
+	color: #333333;
+}
+.hintTitle{
+	display: inline-block;
+	height: 111rpx;
+	line-height: 111rpx;
+	font-weight: 700;
+	font-size: 30rpx;
+	color: #333333;
+}
+.selectImgs{
+	height: 203rpx;
+	margin-top: 30rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.selectImgBox{
+	width: 340rpx;
+	height: 203rpx;
+	-webkit-border-radius:13rpx;
+	        border-radius:13rpx;
+	overflow: hidden;
+	background-color: rgba(244,244,244,0.38);
+	border: 1rpx dashed rgba(153,153,153,1);
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	position: relative;
+}
+.img{
+	width: 65rpx;
+	height: 48rpx;
+	z-index: 1;
+}
+.selectImgHint{
+	font-size: 30rpx;
+	color: #999999;
+	z-index: 1;
+}
+.preview{
+	width: 340rpx;
+	height: 203rpx;
+	position: absolute;
+	top: 0;left: 0;
+}
+.btn{
+	display: inline-block;
+	width: 711rpx;
+	height: 90rpx;
+	background-color: #0081FF;
+	color: #FFFFFF;
+	font-size: 30rpx;
+	text-align: center;
+	line-height: 90rpx;
+	position: absolute;
+	bottom: 10%;
+	left: 50%;margin-left: -355.5rpx;
+}
+

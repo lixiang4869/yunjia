@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "q-s-grid": "/components/QS-Grids/QS-Grid"
+  }
+}

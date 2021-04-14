@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "hans-tabber": "/components/hans-tabbar/hans-tabbar",
+    "home": "/mall/index/home"
+  }
+}

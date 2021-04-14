@@ -1,0 +1,107 @@
+
+.btn {
+	font-size: 30rpx;
+	width: 90%;
+	margin-left: 5%;
+	height: 90rpx;
+	line-height: 80rpx;
+	color: #FFFFFF;
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
+	background: #fe2b10;
+	margin-top: 60rpx;
+}
+.login-img {
+	width:20vw;
+	height: 20vw;
+	margin: 0 auto;
+	/* vertical-align: middle; */
+	margin-top: 40px;
+}
+image {
+	width: 20vw;
+	height: 20vw;
+}
+.forget_flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+
+/* 头部布局 */
+.con {
+	/* margin: 10px 0 0 10px; */
+}
+.go_back {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+
+/* 注册字体 */
+.login-reg {
+	font-size: 15px;
+	margin-right: 10px;
+}
+.go_back image {
+	width: 2vw;
+	height: 4vw;
+	margin-bottom: 20px;
+}
+
+/*  */
+.font_pas {
+	font-size: 16px;
+	font-weight: bold;
+}
+.font-segg {
+	color: #999999;
+	font-size: 12px;
+	margin-top: 5px;
+}
+.forget_card {
+	margin-top: 45px;
+}
+.forget_input {
+	margin-top: 30rpx;
+	width: 90%;
+	height: 90rpx;
+	padding: 18rpx 40rpx;
+	margin-left: 5%;
+
+	font-size: 32rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	color: #333333;
+	/* border-bottom: 2upx solid #DBDADA; */
+	border: 2rpx solid #efeeee;
+	background-color: #efeeee;
+	-webkit-border-radius: 8rpx;
+	        border-radius: 8rpx;
+	outline: 0;
+}
+.uni-input-placeholder {
+	font-size: 32rpx;
+	color: #a2a1a1;
+}
+.forget_btn {
+	padding: 10rpx 20rpx;
+	margin-top: 120rpx;
+}
+

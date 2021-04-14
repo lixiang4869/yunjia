@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['audioPlay',['$event']]]]]}}" class="audio-player" style="{{'opacity:'+(opcity)+';'}}" bindtap="__e"><text class="time">{{time}}</text><view class="controls play-btn"><image src="{{style=='self'?'/static/images/voicemsgmy.png':'/static/images/voicemsg.png'}}"></image></view></view>

@@ -1,0 +1,62 @@
+
+.content {
+		background: #ffffff;
+		width: 100%;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: column;
+		        flex-direction: column;
+}
+.zui {
+		background: #ffffff;
+		margin-left: 20rpx;
+		margin-right: 20rpx;
+		
+		display: -webkit-box;
+		
+		display: -webkit-flex;
+		
+		display: flex;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: row;
+		        flex-direction: row;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		        align-items: center;
+		height: 104rpx;
+}
+.t1 {
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		        flex: 1;
+		font-size: 30rpx;
+		color: #333333;
+}
+.t2 {
+		font-size: 30rpx;
+		color: #999999;
+}
+.t3 {
+			font-size: 30rpx;
+			color: #96732f;
+}
+.shopImg {
+		width: 108rpx;
+		height: 80rpx;
+		margin-left: 30rpx;
+		margin-right: 30rpx;
+}
+.right {
+		width: 15rpx;
+		height: 28rpx;
+		margin-left: 30rpx;
+		margin-right: 30rpx;
+}
+

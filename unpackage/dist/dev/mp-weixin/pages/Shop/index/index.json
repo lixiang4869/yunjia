@@ -1,0 +1,12 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
+  "backgroundColor": "#ffffff",
+  "onReachBottomDistance": 100,
+  "usingComponents": {
+    "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar",
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "uni-transition": "/components/uni-transition/uni-transition",
+    "uni-popup-dialog": "/components/uni-popup/uni-popup-dialog2"
+  }
+}

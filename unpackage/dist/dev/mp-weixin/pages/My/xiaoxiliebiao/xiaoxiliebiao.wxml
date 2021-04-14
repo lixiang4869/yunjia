@@ -1,0 +1,1 @@
+<view><view class="content"><view class="chat-list"><block wx:for="{{$root.l0}}" wx:for-item="chat" wx:for-index="index" wx:key="index"><view class="chat"><view class="Title">{{chat.$orig.title}}</view><view class="Titles">{{chat.$orig.content}}</view><view class="time">{{chat.m0}}</view></view></block></view></view></view>

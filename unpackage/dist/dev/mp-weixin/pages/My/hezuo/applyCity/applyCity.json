@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#f72322",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "加入我们",
+  "usingComponents": {
+    "mpvue-city-picker": "/components/mpvue-citypicker/mpvueCityPicker"
+  }
+}

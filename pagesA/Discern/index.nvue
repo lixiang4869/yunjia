@@ -1,0 +1,349 @@
+<template>
+	<view class="pageBox" :style="{width:width+'px',height:height+'px'}">
+		<view class="status_bar">
+			<!-- 这里是状态栏 -->
+		</view>
+		<!-- 头部模块 -->
+		<view class="topBox" :style="{width:width+'px'}">
+			<image :style="{width:width+'px'}" class="topBoxBg" src="https://xin.yiyunoto.com/uploads/static/bao/beijing.png" mode="scaleToFill"></image>
+			<view class="backPage" @click="back">
+				<image class="backImg" src="../../static/public/goBack.png" ></image>
+			</view>
+			<view class="editBox">
+				<image class="editImg" src="../../static/discern/edit.png" mode=""></image>
+			</view>
+			<!-- #ifdef MP-WEIXIN -->
+			<view class="headBox">
+			<!-- #endif -->
+			<!-- #ifndef MP-WEIXIN -->
+			<view class="headBox" @click="toUplodHead">
+			<!-- #endif -->
+				<image class="headBorder" :src="imgurl+img" mode=""></image>
+				<cover-image class="headImg" :src="userInfo.image"></cover-image>
+			</view>
+			<text class="headText" :style="{width:width+'px'}">{{userInfo.name}}</text>
+		</view>
+		<!-- 内容模块 -->
+		<!-- #ifdef MP||H5 -->
+		<view class="contentBox" :style="{width:width+'px',height:(height-167)+'px'}">
+		<!-- #endif -->
+		<!-- #ifndef MP||H5 -->
+		<view class="contentBox" :style="{width:width+'px',height:(height-161)+'px'}">
+		<!-- #endif -->
+		<text class="titleTxt">列表详情</text>
+		<!-- #ifdef MP||H5 -->
+		<scroll-view class="itemList" scroll-y="true" :lower-threshold="100" @scrolltolower="getLogList(true)" :style="{width:width+'px',height:(height-225)+'px'}" :show-scrollbar="false">
+		<!-- #endif -->
+		<!-- #ifndef MP||H5 -->
+		<scroll-view class="itemList" scroll-y="true" :lower-threshold="100" @scrolltolower="getLogList(true)" :style="{width:width+'px',height:(height-225)+'px'}" :show-scrollbar="false">
+		<!-- #endif -->
+			<view class="item" :style="{width:width*0.95+'px'}" v-for="(item,index) in listData" :key="index">
+				<image class="itemHeadImg" :src="wuyeurl+item.path" mode=""></image>
+				<view class="itemDataInfo" :style="{width:width*0.95*0.7+'px'}">
+					<view class="itemTitleBox" :style="{width:width*0.95*0.7+'px'}">
+						<text class="itemTitleTxt">{{item.name}}</text>
+						<view class="itemTitleCoef">
+							<text class="itemTitleCoefTxt">识别度:{{item.score}}%</text>
+						</view>
+					</view>
+					<text class="itemBottomTxt">刷脸时间：{{item.create_time}}</text>
+				</view>
+			</view>
+		</scroll-view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default { 
+		data() {
+			return {
+				img:"/uploads/static/discern/headBorder.png",
+				width:'',
+				height:'',
+				wuyeurl:'',
+				imgurl:'',
+				tel:'',
+				listData:[],
+				userInfo:{},
+				nowPage:1,
+				maxPage:1
+			}
+		},
+		onLoad() {
+			this.wuyeurl = this.$store.state.wuyeurl;
+			this.imgurl = this.$store.state.imgurl;
+			this.tel = uni.getStorageSync('phone');
+			this.getVideoXY();
+		},
+		onShow() {
+			/* 隐藏凸起图标 */
+			// #ifdef APP-PLUS
+			var icon = plus.nativeObj.View.getViewById("icon");
+			setTimeout(function() {
+				if(icon)
+				icon.hide();
+			}, 100);
+			// #endif
+			this.getUserInfo();
+			this.getLogList();
+		},
+		methods: {
+			// 获取视口宽高
+			getVideoXY(){
+				let res = uni.getSystemInfoSync()
+				console.log(res);
+				this.width = res.windowWidth;
+				this.height = res.windowHeight;
+				console.log(res.screenHeight)
+			},
+			// 获取人脸识别记录
+			getLogList(state){
+				var _this = this;
+				if(state){
+					if(this.nowPage < this.maxPage){
+						this.nowPage++;
+						uni.request({
+							url:_this.wuyeurl+'/api/wuye/admin/faceRecognitionList',
+							method:"POST",
+							data:{
+								tel:_this.tel,
+								page:_this.nowPage
+							},
+							success(res) {
+								console.log(res);
+								_this.maxPage = res.data.data.last_page;
+								// _this.listData = res.data.data.data
+								res.data.data.data.forEach(function(currentValue, index, arr){
+									_this.listData.push(currentValue)
+								})
+							}
+						})
+					}
+				}else{
+					uni.request({
+						url:_this.wuyeurl+'/api/wuye/admin/faceRecognitionList',
+						method:"POST",
+						data:{
+							tel:_this.tel,
+							page:_this.nowPage
+						},
+						success(res) {
+							console.log(res);
+							_this.maxPage = res.data.data.total;
+							_this.listData = res.data.data.data
+						}
+					})
+				}
+			},
+			// 获取用户信息
+			getUserInfo(){
+				var that = this;
+				uni.request({
+					url:this.wuyeurl+'/api/wuye/admin/memberFaceInfo',
+					method:"POST",
+					data:{
+						tel:that.tel
+					},
+					success(res) {
+						console.log(res);
+						that.userInfo.name = res.data.data.name;
+						that.userInfo.image = res.data.data.member_face.image;
+					}
+				})
+			},
+			back(){
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			toUplodHead(){
+				uni.navigateTo({
+					url:'./inviteUser'
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	// 头部
+	.topBox{
+		height: 386upx;
+		position: relative;
+	}
+	.topBoxBg{
+		height: 386upx;
+	}
+	.backPage{
+		width: 50upx;
+		height: 50upx;
+		position: absolute;
+		top: 90upx;left: 20upx;
+	}
+	.backImg{
+		width: 19rpx;
+		height: 34rpx;
+	
+	}
+	.editBox{
+		width: 50upx;
+		height: 50upx;
+		position: absolute;
+		top: 90upx;right: 25upx;
+	}
+	.editImg{
+		width: 50upx;
+		height: 50upx;
+	}
+	.headBox{
+		width: 194upx;
+		height: 194upx;
+		position: absolute;
+		/* #ifndef H5||MP */
+		top: 40%;
+		left: 125%;
+		/* #endif */
+		/* #ifdef H5||MP */
+		top: 40%;margin-top: -97upx;
+		left: 50%;margin-left: -97upx;
+		/* #endif */
+	}
+	.headBorder{
+		width: 194upx;
+		height: 194upx;
+		z-index:1;
+	}
+	.headImg{
+		width: 142upx;
+		height: 142upx;
+		position: absolute;
+		border-radius: 50%;
+		/* #ifndef MP||H5 */
+		top: 50%;margin-top: -81upx;
+		left: 50%;margin-left: -81upx;
+		/* #endif */
+		/* #ifdef MP||H5 */
+		top: 50%;margin-top: -71upx;
+		left: 50%;margin-left: -71upx;
+		/* #endif */
+	}
+	.headText{
+		/* #ifndef APP-PLUS */
+		display: inline-block;
+		/* #endif */
+		font-size: 30upx;
+		color: #fff;
+		position: absolute;
+		bottom: 60upx;
+		text-align: center;
+	}
+	
+	// 内容样式
+	.contentBox{
+		border-top-left-radius: 50upx;
+		border-top-right-radius: 50upx;
+		margin-top: -50upx;
+		padding-top: 50upx;
+		background-color: #fff;
+		/* #ifndef APP-PLUS */
+		box-sizing:border-box;
+		/* #endif */
+	}
+	.titleTxt{
+		color: #333;
+		font-weight: 600;
+		font-size: 30upx;
+		margin-bottom: 42upx;
+		margin-left: 20upx;
+	}
+	.itemList{
+		padding: 0 20upx;
+		/* #ifndef APP-PLUS */
+		box-sizing:border-box;
+		/* #endif */
+	}
+	.item{
+		height: 135upx;
+		background-color: #fff;
+		margin-bottom: 20upx;
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		box-shadow: 0upx 1upx 2upx 0upx rgba(0,0,0,0.1)
+	}
+	.itemHeadImg{
+		width: 178upx;
+		height: 135upx;
+		border-radius: 20rpx;
+	}
+	.itemDataInfo{
+		height: 135upx;
+		padding: 10upx 0upx;
+		/* #ifndef APP-PLUS */
+		box-sizing: border-box;
+		/* #endif */
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.itemTitleBox{
+		height: 40upx;
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.itemTitleTxt{
+		font-size: 30upx;
+		color: #333;
+		line-height: 40upx;
+	}
+	.itemTitleCoef{
+		width: 205upx;
+		height: 40upx;
+		background-color: #DDEEFF;
+		/* #ifndef APP-PLUS */
+		border: 1px solid #56A9FF;
+		/* #endif */
+		border-radius: 20upx;
+		/* #ifdef H5||MP */
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;align-items: center;
+		/* #endif */
+		/* #ifndef */
+		position: relative;
+		/* #endif */
+	}
+	.itemTitleCoefTxt{
+		width: 205upx;
+		font-size: 24upx;
+		color: #2695FA;
+		text-align: center;
+		line-height: 40upx;
+	}
+	.itemBottomTxt{
+		font-size: 24upx;
+		color: #666;
+	}
+	
+	.status_bar {
+		/* #ifndef APP-PLUS */
+		height: var(--status-bar-height);
+		/* #endif */
+		width: 100%;
+		/* #ifdef MP-WEIXIN */
+		padding-top: 60upx;
+		/* #endif */
+		background-color: #0081FF;
+	}
+</style>

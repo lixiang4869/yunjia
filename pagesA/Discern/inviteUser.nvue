@@ -1,0 +1,381 @@
+<template>
+	<view class="page" :style="{width:width+'px',height:height+'px'}">
+		<view class="status_bar">
+			<!-- 这里是状态栏 -->
+		</view>
+		<!-- 导航栏 -->
+		<view class="nav" :style="{width:width+'px'}">
+			<image @click="backPage" class="backImg" src="../../static/public/blackBack.png" mode=""></image>
+			<text class="title" style="margin-left: 40rpx;">人脸识别</text>
+			<text style="font-size: 30rpx;color: #333333;margin-right: 20upx;font-weight: 700;" @click="toDetail">识别记录</text>
+		</view>
+		<!-- 预览窗口 -->
+		<view class="viewBox">
+			<image class="photo" v-if="!userImg" :src="imgUrl+'/uploads/static/discern/outline.png'" mode=""></image>
+			<image style="width: 520rpx;height:520rpx; border-radius: 20rpx;" v-if="userImg" :src="userImg" mode=""></image>
+		</view>
+		<!-- 页面按钮 -->
+		<view class="btnBox" @click="catPhoto" v-if="stare==0">
+			<image class="btnImg" src="../../static/video/startLiveBtnBg.png" mode=""></image>
+			<text style="color: #fff;font-size: 30upx; width: 383upx;height:70upx;line-height: 70upx;text-align: center;position:absolute;">上传体验人脸识别</text>
+		</view>
+		<view class="btnBox" @click="jump(1)" v-if="stare == 1">
+			<image class="btnImg" src="../../static/video/startLiveBtnBg.png" mode=""></image>
+			<text style="color: #fff;font-size: 30upx; width: 383upx;height:70upx;line-height: 70upx;text-align: center;position:absolute;">去登录</text>
+		</view>
+		<view class="btnBox" @click="jump(2)" v-if="stare == 2">
+			<image class="btnImg" src="../../static/video/startLiveBtnBg.png" mode=""></image>
+			<text style="color: #fff;font-size: 30upx; width: 383upx;height:70upx;line-height: 70upx;text-align: center;position:absolute;">绑定小区</text>
+		</view>
+		<view class="btnBox" @click="jump(3)" v-if="stare == 3">
+			<image class="btnImg" src="../../static/video/startLiveBtnBg.png" mode=""></image>
+			<text style="color: #fff;font-size: 30upx; width: 383upx;height:70upx;line-height: 70upx;text-align: center;position:absolute;">绑定手机号</text>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data(){
+			return{
+				width:'',
+				height:'',
+				imgUrl:this.$store.state.imgurl,
+				src:'/uploads/static/home/outline.png',
+				url:'',
+				faceUrl:'',
+				tel:'',
+				imageUrl:'',
+				socketTask:'',
+				stare:'',
+				userImg:'',
+				scoketWuyeUrl:this.$store.state.scoketurl_wuye
+			}
+		},
+		 onLoad() {
+			this.getVideoXY();
+			this.imgUrl = this.$store.state.url;
+			this.url = this.$store.state.wuyeurl;
+			// await this.getUrl();
+		},
+		onReady() {},
+		async onShow() {
+			/* 隐藏凸起图标 */
+			// #ifdef APP-PLUS
+			var icon = plus.nativeObj.View.getViewById("icon");
+			setTimeout(function() {
+				if(icon)
+				icon.hide();
+			}, 100);
+			// #endif
+			await this.getUrl();
+			// this.tel = uni.getStorageSync('phone');
+			// this.faceUrl = uni.getStorageSync('com_url');
+			this.socketTask = uni.connectSocket({
+				url: "wss://wuye.yiyunoto.com/wss",
+				success(data) {
+					console.log("websocket连接成功");
+				},
+			});
+			uni.onSocketOpen(function (res) {
+			  console.log('WebSocket连接已打开！');
+			});
+			this.socketTask.onError(function(e){
+					console.log("WebSocket连接...！"+JSON.stringify(e));
+			})
+			this.socketTask.onOpen(function(e){
+				console.log("WebSocket连接正常打开中...！"+e);
+			})
+			
+			
+			var res = await this.getUserHeadImg();
+			
+			if(res.data.member_face&&res.data.member_face.image){
+				this.userImg = res.data.member_face.image;
+			}
+		},
+		onHide() {
+			this.closeSocket();
+		},
+		onUnload() {
+			this.closeSocket();
+		},
+		beforeDestroy() {
+			this.closeSocket();
+		},
+		methods:{
+			// 获取视口宽高
+			getVideoXY(){
+				let res = uni.getSystemInfoSync()
+				console.log(res);
+				this.width = res.windowWidth;
+				this.height = res.windowHeight;
+			},
+			async getUserHeadImg(){
+				var authtoken = uni.getStorageSync('authtoken');
+				var _this = this;
+				return new Promise((resolve,reject)=>{
+					uni.request({
+						url:this.url+'/api/wuye/admin/memberFaceInfo',
+						header:{
+							authtoken
+						},
+						method:"POST",
+						data:{
+							tel:this.tel
+						},
+						success(res) {
+							resolve(res.data)
+						}
+					})
+				})
+			},
+			toDetail(){
+				uni.navigateTo({
+					url:'./index'
+				})
+			},
+			// 返回上一页
+			backPage(){
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			catPhoto(){
+				this.faceUrl = uni.getStorageSync('com_url');
+				var that = this;
+				if(this.faceUrl==''){
+					uni.showToast({
+						icon:'none',
+						title:'请先绑定小区'
+					})
+					uni.navigateTo({
+						url:'../My/bindXQ/selectXiaoQu'
+					})
+					return;
+				}
+				uni.chooseImage({
+					count:1,
+					sourceType:['camera'],
+					success(obj) {
+						that.src = obj.tempFiles[0].path;
+						that.upLoadPhoto();
+					}
+				})
+			},
+			// 关闭websocket【离开这个页面的时候执行关闭】
+			closeSocket() {
+				var that = this;
+
+				if(that.socketTask)
+				that.socketTask.close({
+
+					success(res) {
+						that.is_open_socket = false;
+						console.log("关闭成功", res)
+					},
+					fail(err) {
+						console.log("关闭失败", err)
+					}
+				})
+			},
+			upLoadPhoto(){
+				var that = this;
+				uni.showLoading({
+					title:'上传中'
+				})
+				uni.uploadFile({
+					url:that.faceUrl+'/api/wuye/file/faceUpload',
+					filePath:that.src,
+					name:"image",
+					formData:{
+						image:that.src
+					},
+					success(res){
+						var data = JSON.parse(res.data);
+						console.log(data)
+						if(data.code==10000){
+							that.imageUrl = data.data.image;
+							that.userImg = that.faceUrl + data.data.image;
+							that.upYezhuImg();
+						}else{
+							uni.hideLoading();
+							uni.showToast({ 
+								icon:'none',
+								title:'图片上传失败，请重新上传'
+							})
+						}
+					}
+				})
+			},
+			upYezhuImg(){
+				var that = this;
+				uni.request({
+					url:that.faceUrl+'/api/wuye/file/faceImageUpload',
+					method:"POST",
+					data:{
+						tel:that.tel,
+						image:that.imageUrl
+					},
+					success(res) {
+						console.log(res);
+						if(res.data.code==10000){
+							var arr = res.data.data;
+							for(var i=0;i<arr.length;i++){
+								that.socketTask.send({
+									data: JSON.stringify(res.data.data[i]),
+									async fail(e){
+										console.log('消息发送成功1111',e)
+									},
+									async success(){
+										console.log('消息发送成功aaaaaaaaaaaaaaaaa')
+										uni.hideLoading()
+										uni.showToast({
+											icon:'none',
+											title:'上传成功'
+										})
+									}
+									
+								})
+							}
+						}else{
+							uni.hideLoading();
+							uni.showToast({
+								icon:'none',
+								title:res.data.desc
+							})
+						}
+					}
+				})
+			},
+			async getUrl(){
+				var _this = this;
+				return new Promise((resolve,reject)=>{
+					var authtoken = uni.getStorageSync('authtoken');
+					var url = this.$store.state.url;
+					uni.request({
+						url:url+"/api/member/index",
+						header:{
+							authtoken
+						},
+						method:"POST",
+						success(res) {
+							console.log(res);
+							if(res.data.code==-7){
+								_this.stare = 1;
+								uni.showToast({
+									icon:'none',
+									title:'请先登录'
+								})
+								resolve();
+							}else if(res.data.code == 1 && res.data.data.meminfo.phone==0){
+								
+								_this.stare = 3;
+								uni.showToast({
+									icon:'none',
+									title:'请先绑定手机号'
+								})
+								resolve();
+							}else if(!/http:|https:/.test(res.data.data.meminfo.com_url) && res.data.code == 1){
+								_this.stare = 2;
+								console.log(res.data.data.meminfo.com_url)
+								uni.showToast({
+									icon:'none',
+									title:'请先绑定小区'
+								})
+								resolve();
+							}else{
+								_this.stare = 0;
+								_this.tel = res.data.data.meminfo.phone;
+								uni.setStorageSync('phone',res.data.data.meminfo.phone);
+								uni.setStorageSync('com_url',res.data.data.meminfo.com_url);
+								uni.setStorageSync('com_id',res.data.data.meminfo.com_id);
+								resolve();
+							}
+						}
+					})
+				})
+				
+				
+			},
+			jump(i){
+				if(i==1){
+					uni.navigateTo({
+						url:'../../pages/My/Login-registration/Login-registration'
+					})
+				}else if(i==2){
+					uni.navigateTo({
+						url:'../../pages/My/bindXQ/selectXiaoQu'
+					})
+				}else if(i==3){
+					uni.navigateTo({
+						url: '/pages/My/Modify-phoneNumber/Modify-phoneNumbers' //跳转绑定手机号页面
+					})	
+				}
+			}
+		}
+	}
+</script>
+
+<style>
+/* 去掉刘海 */
+.status_bar {
+	/* #ifndef APP-PLUS */
+	height: var(--status-bar-height);
+	/* #endif */
+	width: 100%;
+	padding-top: 60rpx;
+}
+.page{
+}
+
+/* 导航栏 */
+.nav{
+	width: 100%;
+	height: 80upx;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	/* #ifdef MP-WEIXIN */
+	padding-top: 90upx;
+	/* #endif */
+}
+.backImg{
+	width: 50upx;
+	height: 50upx;
+	margin-left: 20upx;
+}
+.title{
+	font-size: 36upx;
+	font-weight: 600;
+	color: #333;
+}
+
+/* 预览窗口 */
+.viewBox{
+	width: 520upx;
+	height: 520upx;
+	margin: 0upx 115upx;
+	margin-top: 230upx;
+}
+
+.photo{
+	width: 520upx;
+	height: 520upx;
+	border-radius: 260upx;
+}
+/* 按钮 */
+.btnBox{
+	width: 383upx;
+	height: 70upx;
+	margin: 0upx 177upx;
+	margin-top: 170upx;
+}
+.btnImg{
+	width: 383upx;
+	height: 70upx;
+}
+</style>

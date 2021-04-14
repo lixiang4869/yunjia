@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "my-share": "/components/myShare/myShare",
+    "my-comment": "/components/myComment/myComment",
+    "uni-transition": "/components/uni-transition/uni-transition"
+  }
+}

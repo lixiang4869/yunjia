@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "hans-tabber": "/components/hans-tabbar/hans-tabbar"
+  }
+}

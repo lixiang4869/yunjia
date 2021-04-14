@@ -1,0 +1,315 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+.img1 {
+  margin: 30rpx;
+  width: 48rpx;
+  height: 39rpx;
+}
+.img2 {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  width: 30rpx;
+  height: 36rpx;
+}
+.orderName {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 32rpx;
+  color: #333333;
+}
+.tabNav {
+  width: 100%;
+  margin-bottom: 30rpx;
+  background: #f6f7fa;
+  margin-top: -50rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-border-top-left-radius: 50rpx;
+          border-top-left-radius: 50rpx;
+  -webkit-border-top-right-radius: 50rpx;
+          border-top-right-radius: 50rpx;
+}
+.navItem {
+  width: 24%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.tabName {
+  margin-top: 40rpx;
+  font-size: 30rpx;
+  color: #333333;
+  margin-bottom: 15rpx;
+}
+.tabName2 {
+  margin-top: 40rpx;
+  font-size: 30rpx;
+  color: #c19b45;
+  margin-bottom: 10rpx;
+}
+.tabLine {
+  width: 50rpx;
+  -webkit-border-radius: 5rpx;
+          border-radius: 5rpx;
+  height: 5rpx;
+  background: #c19b45;
+}
+.content {
+  background: #f6f7fa;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.title {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background: #242b3e;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  height: 340rpx;
+}
+.shopName {
+  margin-left: 20rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #ffffff;
+}
+.cate {
+  margin-top: 70rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  width: 100%;
+}
+.cate .item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  font-size: 26rpx;
+  color: #ffffff;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.cate .item .img {
+  width: 60rpx;
+  height: 60rpx;
+}
+.dian {
+  margin: 20rpx;
+  width: 15rpx;
+  height: 15rpx;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  background: #0f835f;
+}
+.img {
+  margin: 20rpx;
+  width: 12rpx;
+  height: 22rpx;
+}
+.statu {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 30rpx;
+  color: #333;
+}
+.qianbao {
+  background-image: url("https://xin.yiyunoto.com/uploads/static/shopcenter/topbg.png");
+  height: 270rpx;
+  margin: 20rpx;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.qianbao-top {
+  color: #333333;
+  margin: 25rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.qianbao-bottom {
+  padding-top: 30rpx;
+  color: #333333;
+  margin: 25rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.b {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  margin-top: 24rpx;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.top {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.zui {
+  background: #ffffff;
+  margin-left: 20rpx;
+  margin-bottom: 30rpx;
+  margin-right: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
+}
+.edu {
+  font-size: 30rpx;
+  margin-left: 30rpx;
+  color: #c19b45;
+}
+.logo {
+  float: left;
+  width: 32rpx;
+  height: 36rpx;
+  margin: 30rpx;
+}
+.address {
+  margin-top: 50rpx;
+  margin-left: 30rpx;
+  font-size: 30rpx;
+  color: #666666;
+}
+.right {
+  width: 15rpx;
+  height: 28rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+

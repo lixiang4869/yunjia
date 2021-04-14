@@ -1,0 +1,58 @@
+
+.QS-SwiperGrid-items.data-v-cdccfe82{
+
+
+
+
+	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+}
+.QS-SwiperGrid-item.data-v-cdccfe82{
+	background: #ffffff;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
+
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.grid-img.data-v-cdccfe82{
+	/* background-color: #f8f8f8; */
+}
+.grid-text.data-v-cdccfe82{
+
+
+
+
+
+
+	width: 100%;
+	white-space: nowrap;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+}
+

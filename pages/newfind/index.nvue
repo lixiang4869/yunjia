@@ -1,0 +1,705 @@
+<template>
+
+	<div class="page" :style="{ height: height }">
+		<swiper class="swiper" :vertical="true" @change="onSwiperChange" :circular="circular">
+			<swiper-item v-for="(item, idx) in videoList" :key="idx" class="swiper-item">
+
+					<video class="video" :id="item.id" :ref="item.id" :src="item.src" :show-play-btn="false" 
+					:show-fullscreen-btn="false" :poster="url+item.vurl" :enable-progress-gesture="false" :page-gesture="false" 
+					:vslide-gesture="false" :vslide-gesture-in-fullscreen="false"
+					:loop="true" @click="stop(item)" objectFit="contain"></video>
+
+
+					<cover-view class="cover-view-left">
+						<cover-view class="left-view">
+							<!-- #ifdef APP-PLUS-NVUE -->
+							<text class="left-text">@{{item.at}}</text>
+							<!-- #endif -->
+							<!-- #ifndef APP-PLUS-NVUE -->
+							<cover-view class="left-text">@{{item.at}}</cover-view>
+							<!-- #endif -->
+						</cover-view>
+						<cover-view class="left-view">
+							<!-- #ifdef APP-PLUS-NVUE -->
+							<text class="left-text">{{item.content}}</text>
+							<!-- #endif -->
+							<!-- #ifndef APP-PLUS-NVUE -->
+							<cover-view class="left-text">{{item.content}}</cover-view>
+							<!-- #endif -->
+						</cover-view>
+					</cover-view>
+					<cover-view class="cover-view-right">
+						<cover-image :src="item.avater" class="avater img"></cover-image>
+						<!-- #ifdef APP-PLUS-NVUE -->
+						<text class="right-text-avater" @click.stop="attentionUp(item)" v-if="item.guanzhu != 1">+</text>
+						<text class="right-text"></text>
+						<!-- #endif -->
+						<!-- #ifndef APP-PLUS-NVUE -->
+						<cover-view class="right-text-avater" @click.stop="attentionUp(item)" v-if="item.guanzhu != 1">+</cover-view>
+						<cover-view class="right-text"></cover-view>
+						<!-- #endif -->
+
+						<cover-image :src="item.check?'https://xin.yiyunoto.com/uploads/static/aixinRed.png':'https://xin.yiyunoto.com/uploads/static/aixin.png'" class="img" @click.stop="tapLove(item)"></cover-image>
+
+						<!-- #ifdef APP-PLUS-NVUE -->
+						<text class="right-text">{{item.like/10000 >= 1 ? parseInt(item.like/10000)+'W+':item.like}}</text>
+						<!-- #endif -->
+						<!-- #ifndef APP-PLUS-NVUE -->
+						<cover-view class="right-text">{{item.like/10000 >= 1 ? parseInt(item.like/10000)+'W+':item.like}}</cover-view>
+						<!-- #endif -->
+
+						<cover-image src="../../static/xiaoxi.png" class="img" @click.stop="tapMsg(idx)"></cover-image>
+
+						<!-- #ifdef APP-PLUS-NVUE -->
+						<text class="right-text">{{item.comment/10000 >= 1 ? parseInt(item.comment/10000)+'W+':item.comment}}</text>
+						<!-- #endif -->
+						<!-- #ifndef APP-PLUS-NVUE -->
+						<cover-view class="right-text">{{item.comment/10000 >= 1 ? parseInt(item.comment/10000)+'W+':item.comment}}</cover-view>
+						<!-- #endif -->
+							
+						<cover-image src="https://xin.yiyunoto.com/uploads/static/share-fill.png" class="img" @click.stop="tapShare($event,'1',idx)">
+						
+						</cover-image>
+
+						<!-- #ifdef APP-PLUS-NVUE -->
+						<text class="right-text">分享</text>
+						<!-- #endif -->
+						<!-- #ifndef APP-PLUS-NVUE -->
+						<cover-view class="right-text">
+							
+							分享</cover-view>
+						<!-- #endif -->
+
+					</cover-view>
+			
+			</swiper-item>
+		</swiper> 
+		<my-comment v-if="commentShow" @commentClose="commentClose" :oid="oid" :authtoken="authtoken" :url="url" @comm_numPlus="comm_numPlus"></my-comment>
+		<!-- <uni-transition :modeClass="['fade','slide-bottom']" :show="shareShow">
+			<my-share @tapShare="tapShare" @select="select" :title='"分享到"'></my-share>
+		</uni-transition> -->
+		<uni-popup ref="popup" type="bottom">
+			<my-share @tapShare="tapShare" @select="select" :title='"分享到"'></my-share>
+		</uni-popup>
+	</div>
+</template>
+<script>
+	import myShare from '@/components/myShare/myShare.nvue'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import myComment from '@/components/myComment/myComment.vue'
+	import uniTransition from '@/components/uni-transition/uni-transition.vue'
+	var util = require('../../common/util.js');
+	var getImgUrl = util.getImgUrl;
+	export default {
+		components:{
+			myShare,
+			myComment,
+			uniTransition,
+			uniPopup
+		},
+		data() {
+			return {
+				tabBars: [{
+					name: '关注',
+					id: 'guanzhu'
+				}, {
+					name: '直播',
+					id: 'tuijian'
+				}, {
+					name: '短视频',
+					id: 'tiyu'
+				}],
+				currentindex: 2,
+				url: this.$store.state.url,
+				
+				playCount: 2, //剩余多少视频加载视频列表
+				videoList: [],
+				circular: true,
+				videoList: [{
+						id: "video0",
+						src: "",
+						img: "",
+						content: '',
+						like: '7w',
+						comment: '1045',
+						at: '',
+						avater: "",
+					},
+					{
+						id: "video1",
+						src: "",
+						img: "",
+						content: '',
+						like: '7w',
+						comment: '1045',
+						at: '',
+						avater: "",
+					},
+					{
+						id: "video2",
+						src: "",
+						img: "",
+						content: '',
+						like: '7w',
+						comment: '1045',
+						at: '',
+						avater: "",
+					}
+				],
+				videoDataList: [],
+				height: '667px',
+				index: 0,
+				width: '',
+				oldIndex: 0,
+				authtoken:uni.getStorageSync('authtoken'),
+				commentShow:false,
+				shareShow:false,
+				idx:0,
+				oid:0,
+				page:1,
+				_videoContextList:[],
+				_videoIndex:0,
+				_videoDataIndex:0,
+				maxPage:1
+			}
+		},
+		created() {
+			// //#ifdef APP-PLUS
+			// plus.screen.lockOrientation("portrait-primary")
+			// //隐藏subnvue
+			// uni.getSubNVueById('comment').hide()
+			// uni.getSubNVueById('input-box').hide()
+			// //#endif
+			var sysheight = uni.getSystemInfoSync().windowHeight
+			this.height = `${sysheight}px`
+			let width = uni.getSystemInfoSync().windowWidth
+			this.width = `${width}px`
+			// this.videoList.length = 300
+			// this.videoList.fill({
+			// 	src: ''
+			// })
+
+
+
+		},
+		async mounted() {
+			this.init();
+			await this.pushVideoList();
+
+			this.updateVideo(true);
+		},
+		props:{
+			isVideoStop:{
+				type:Boolean,
+				default:true
+			}
+		},
+		watch:{
+			isVideoStop(newData,oldData){
+				// 切换后视频结束
+				console.log('newData：'+newData,'oldData：'+oldData)
+				if(this.isVideoStop && this.videoDataList[this._videoDataIndex]){
+					this.videoDataList[this._videoDataIndex].isplaying = false;
+					this._videoContextList[this._videoIndex].pause();
+				}else if(this.videoDataList[this._videoDataIndex]){
+					this.videoDataList[this._videoDataIndex].isplaying = true;
+					this._videoContextList[this._videoIndex].play();
+				}
+			}
+		},
+		onHide() {
+			if (this.videoDataList[this._videoDataIndex]&this.videoDataList[this._videoDataIndex].isplaying) {
+				this.videoDataList[this._videoDataIndex].isplaying = false;
+				this._videoContextList[this._videoIndex].pause();
+			}
+		},
+		methods: {
+			stop() {
+				if (this.videoDataList[this._videoDataIndex].isplaying) {
+					this.videoDataList[this._videoDataIndex].isplaying = false;
+					this._videoContextList[this._videoIndex].pause();
+				} else {
+					this.videoDataList[this._videoDataIndex].isplaying = true;
+					this._videoContextList[this._videoIndex].play();
+				}
+			},
+			init() {
+				this._videoIndex = 0;
+				this._videoContextList = [];
+				for (var i = 0; i < this.videoList.length; i++) {
+				var c=	uni.createVideoContext('video' + i, this)
+					this._videoContextList.push(c);
+				}
+				this._videoDataIndex = 0;
+			},
+			getData(e) {
+				this.videoDataList = videoData;
+				setTimeout(() => {
+					this.updateVideo(true);
+				}, 200)
+			},
+			onSwiperChange(e) {
+				let currentIndex = e.detail.current;
+				if (currentIndex === this._videoIndex) {
+					return;
+				}
+				console.log('  currentIndex', currentIndex);
+				let isNext = false;
+				if (currentIndex === 0 && this._videoIndex === this.videoList.length - 1) {
+					isNext = true;
+				} else if (currentIndex === this.videoList.length - 1 && this._videoIndex === 0) {
+					isNext = false;
+				} else if (currentIndex > this._videoIndex) {
+					isNext = true;
+				}
+
+				if (isNext) {
+					
+					this._videoDataIndex++;
+					if(this._videoDataIndex==this.videoDataList.length-2&&this.page<this.maxPage){
+						this.page++;
+						this.pushVideoList();
+					}
+				} else {
+					this._videoDataIndex--;
+				}
+
+				if (this._videoDataIndex < 0) {
+					this._videoDataIndex = this.videoDataList.length - 1;
+				} else if (this._videoDataIndex >= this.videoDataList.length) {
+					this._videoDataIndex = 0;
+				}
+
+				this.circular = (this._videoDataIndex != 0);
+
+				if (this._videoIndex >= 0) {
+					this._videoContextList[this._videoIndex].pause();
+					this._videoContextList[this._videoIndex].seek(0);
+				}
+
+				this._videoIndex = currentIndex;
+				console.log('  this._videoDataIndex',this._videoDataIndex);
+				setTimeout(() => {
+					this.updateVideo(isNext);
+				}, 200);
+			},
+			getNextIndex(isNext) {
+				let index = this._videoIndex + (isNext ? 1 : -1);
+				if (index < 0) {
+					return this.videoList.length - 1;
+				} else if (index >= this.videoList.length) {
+					return 0;
+				}
+				return index;
+			},
+			getNextDataIndex(isNext) {
+				let index = this._videoDataIndex + (isNext ? 1 : -1);
+				if (index < 0) {
+					return this.videoDataList.length - 1;
+				} else if (index >= this.videoDataList.length) {
+					return 0;
+				}
+				return index;
+			},
+			updateVideo(isNext) {
+				this.$set(this.videoList[this._videoIndex], 'src', this.videoDataList[this._videoDataIndex].src);
+				this.$set(this.videoList[this._videoIndex], 'content', this.videoDataList[this._videoDataIndex].content);
+				this.$set(this.videoList[this._videoIndex], 'at', this.videoDataList[this._videoDataIndex].at);
+				this.$set(this.videoList[this._videoIndex], 'avater', this.videoDataList[this._videoDataIndex].avater);
+				this.$set(this.videoList[this._videoIndex], 'like', this.videoDataList[this._videoDataIndex].like);
+				this.$set(this.videoList[this._videoIndex], 'comment', this.videoDataList[this._videoDataIndex].comment);
+				this.$set(this.videoList[this._videoIndex], 'guanzhu', this.videoDataList[this._videoDataIndex].guanzhu);
+				this.$set(this.videoList[this._videoIndex], 'num', this.videoDataList[this._videoDataIndex].num);
+				this.$set(this.videoList[this._videoIndex], 'check', this.videoDataList[this._videoDataIndex].check);
+				this.$set(this.videoList[this._videoIndex], 'oid', this.videoDataList[this._videoDataIndex].oid);
+				this.$set(this.videoList[this._videoIndex], 'uid', this.videoDataList[this._videoDataIndex].uid);
+
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'src', this.videoDataList[this.getNextDataIndex(isNext)].src);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'content', this.videoDataList[this.getNextDataIndex(isNext)].content);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'at', this.videoDataList[this.getNextDataIndex(isNext)].at);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'avater', this.videoDataList[this.getNextDataIndex(isNext)].avater);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'like', this.videoDataList[this.getNextDataIndex(isNext)].like);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'comment', this.videoDataList[this.getNextDataIndex(isNext)].comment);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'guanzhu', this.videoDataList[this.getNextDataIndex(isNext)].guanzhu);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'num', this.videoDataList[this.getNextDataIndex(isNext)].num);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'check', this.videoDataList[this.getNextDataIndex(isNext)].check);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'oid', this.videoDataList[this.getNextDataIndex(isNext)].oid);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'uid', this.videoDataList[this.getNextDataIndex(isNext)].uid);
+				setTimeout(() => {
+					this._videoContextList[this._videoIndex].play();
+					this.videoDataList[this._videoDataIndex].isplaying = true;
+				}, 200);
+				console.log("v:" + this._videoIndex + " d:" + this._videoDataIndex + "; next v:" + this.getNextIndex(
+					isNext) + " next d:" + this.getNextDataIndex(isNext));
+			},
+
+			ontabtap(e) {
+
+				if (this.currentindex == e) {
+					return;
+				}
+				this.currentindex = e;
+				if (this.currentindex != 2) {
+					for (let item of this.videoList) {
+						item.flag = false
+					}
+				} else {
+					// this.pushVideoList();
+				}
+				console.log('ontabtap', this.currentindex);
+			},
+			changeCurrent(e) {
+				this.index = e.detail.current;
+				for (let item of this.videoList) {
+					item.flag = false
+				}
+				this.videoList[this.index].flag = !this.videoList[this.index].flag
+			},
+			pushVideoList() {
+				let promise = new Promise((resolve, reject) => {
+					uni.request({
+						
+						url: this.url + '/api/Video/collect1',
+						data:{
+							page:this.page
+						},
+						header:{
+							authtoken:uni.getStorageSync('authtoken')
+						},
+						success: (res) => {
+							this.maxPage=res.data.data.totalpage
+							let videoGroup = []
+							for (let item of res.data.data.data) {
+
+								videoGroup.push({
+									src: this.url + item.vurl,
+									content: item.title,
+									like: item.num,
+									comment: item.comm_num,
+									
+									at: item.username,
+									avater: getImgUrl(item.head),
+									isplaying: false,
+									
+									guanzhu:item.guanzhu==1,
+									check:item.like==1,
+									oid:item.id,
+									uid:item.uid
+								})
+
+							}
+							if(this.page==1)
+							this.videoDataList = videoGroup
+							else{
+								this.videoDataList =this.videoDataList .concat(videoGroup)
+							}
+							resolve()
+						}
+					})
+				})
+				return promise
+			},
+			tapLove(item) {
+				// console.log("tapLove",this.index)
+				// this.videoList[this.index].check = true
+				// this.videoList = [...this.videoList]
+				// this.videoList[this.index].like = this.videoList[this.index].like * 1 + 1
+				
+				// this.videoDataList[this._videoDataIndex].check = this.videoDataList[this._videoDataIndex].check==1?0:1;
+				// this.videoDataList[this._videoDataIndex].like = this.videoDataList[this._videoDataIndex].like * 1 + 1;
+				// console.log("tapLove2",this.videoDataList[this._videoDataIndex].check )
+				// console.log("tapLove2",this._videoDataIndex )
+				uni.request({
+					url:this.url+'/api/video/store_l',
+					method:"POST",
+					header:{
+						authtoken:uni.getStorageSync('authtoken')
+					},
+					data:{
+						tid:1,
+						oid:item.oid
+					},
+					success(res) {
+						if(res.data.code==1){
+							item.check=!item.check
+						}
+						// item.check=!item.check
+						// console.log(res);
+					}
+				})
+			},
+			tapAvater() {
+				uni.showToast({
+					icon: 'none',
+					title: `点击索引为${this.index}的头像`
+				})
+			},
+			tapMsg(index) {
+				this.oid = this.videoDataList[this._videoDataIndex].oid;
+				this.commentShow = true;
+			},
+			select(name){
+				console.log(name)
+				console.log(this.videoList[this.index]);
+				var obj = this.videoList[this.index];
+				uni.share({
+				    provider: "weixin",
+				    scene:name,
+				    type: 4,
+					mediaUrl:obj.src,
+				    title: obj.content,
+				    success: function (res) {
+						uni.showToast({
+							icon:'none',
+							title:'转发成功'
+						})
+				        console.log("success:" + JSON.stringify(res));
+				    },
+				    fail: function (err) {
+						uni.showToast({
+							icon:'none',
+							title:'转发失败'
+						})
+				        console.log("fail:" + JSON.stringify(err));
+				    }
+				});
+			},
+			// 弹出分享页面
+			tapShare(e,bool,idx) {
+				// this.idx = idx;
+				// console.log(this.shareShow);
+				if(bool == false){
+					this.$refs.popup1.close()
+				// 	this.shareShow = true;
+				}else{
+					this.shareShow = !this.shareShow;
+					if(this.shareShow){
+						this.$refs.popup.open()
+					}else{
+						this.$refs.popup.close()
+					}
+				}
+			},
+			videoPlay(index) {
+				let promise = new Promise((resolve, reject) => {
+					resolve()
+				})
+				promise.then(res => {
+					this.$set(this.videoList[index], 'flag', !this.videoList[index].flag)
+
+				})
+			},
+			pauseVideo(val) {
+				if (typeof this.videoList[this.oldIndex].initialTime != 'undefined') this.videoList[this.oldIndex].initialTime =
+					val
+			},
+			clickVideo() {
+				this.videoList[this.index].flag = !this.videoList[this.index].flag
+			},
+			attentionUp(item){
+				// this.videoList[this.index].guanzhu = 1;
+				// this.videoDataList[this._videoDataIndex].guanzhu = 1;
+				uni.request({
+					url:this.url+'/api/video/store_l',
+					method:"POST",
+					header:{
+						authtoken:uni.getStorageSync('authtoken')
+					},
+					data:{
+						tid:2,
+						oid:this.videoDataList[this._videoDataIndex].uid
+					},
+					success(res) {
+						if(res.data.code==1){
+							item.guanzhu=!item.guanzhu
+						}else{
+							uni.showToast({
+								title:res.data.msg
+							})
+						}
+						// console.log(res);
+					}
+				})
+			},
+			commentClose(bool){
+				this.commentShow = bool;
+			},
+			comm_numPlus(i){
+				this.videoList[this.index].comment = this.videoList[this.index].comment * 1 + 1
+				
+				this.videoDataList[this._videoDataIndex].comment = this.videoDataList[this._videoDataIndex].comment * 1 + 1;
+			}
+		}
+	}
+</script>
+<style scoped>
+	/* 顶部tabbar */
+	.nav-bar {
+		position: relative;
+		height: 90upx;
+	}
+
+	.uni-tab-item-title-active {
+		color: #007AFF;
+	}
+
+	.scroll-h {
+		margin-top: 50upx;
+		width: 750rpx;
+		height: 80rpx;
+		flex-direction: row;
+		/* #ifndef APP-PLUS */
+		white-space: nowrap;
+		/* #endif */
+	}
+
+	.line-h {
+		height: 1rpx;
+		background-color: #cccccc;
+	}
+
+	.uni-tab-item {
+		/* #ifndef APP-PLUS */
+		display: inline-block;
+		/* #endif */
+		flex-wrap: nowrap;
+		padding-left: 34rpx;
+		padding-right: 34rpx;
+	}
+
+	.uni-tab-item-title {
+		color: #555;
+		font-size: 30rpx;
+		height: 80rpx;
+		line-height: 80rpx;
+		flex-wrap: nowrap;
+		/* #ifndef APP-PLUS */
+		white-space: nowrap;
+		/* #endif */
+	}
+
+
+
+
+	.cover-view-center {
+		position: absolute;
+		justify-content: center;
+		align-items: center;
+		opacity: 0.1;
+		z-index: 999;
+	}
+
+	.cover-view-left {
+		position: absolute;
+		margin-left: 10upx;
+		width: 500upx;
+		bottom: 120upx;
+		z-index: 9999;
+		font-size: 16px;
+		color: #FFFFFF;
+		/* #ifndef APP-PLUS */
+		white-space: pre-wrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		/* #endif */
+	}
+
+	.left-view {
+		margin-bottom: 20upx;
+	}
+
+	.left-text {
+		font-size: 16px;
+		color: #FFFFFF;
+	}
+
+	.avater {
+		border-radius: 50upx;
+		border-color: #fff;
+		border-style: solid;
+		border-width: 2px;
+	}
+
+	.cover-view-right {
+		position: absolute;
+		bottom: 160upx;
+		right: 20upx;
+		/* #ifndef APP-PLUS-NVUE */
+		display: flex;
+		flex-direction: column;
+		/* #endif */
+		z-index: 9999;
+	}
+
+	.right-text-avater {
+		position: absolute;
+		font-size: 14px;
+		top: 80upx;
+		left: 20upx;
+		height: 40upx;
+		width: 40upx;
+		background-color: #DD524D;
+		color: #FFFFFF;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 40upx;
+		z-index: 999;
+	}
+
+	.avater-icon {
+		height: 40upx;
+		width: 40upx;
+
+		color: #fff;
+		background-color: #DD524D;
+		border-radius: 50%;
+		position: absolute;
+		left: 30upx;
+		top: -20upx;
+	}
+
+	.right-text {
+		text-align: center;
+		font-size: 14px;
+		color: #FFFFFF;
+		margin-bottom: 50upx;
+		height: 20px;
+	}
+
+	.img {
+		height: 70upx;
+		width: 70upx;
+		opacity: 0.9;
+	}
+
+  /* #ifndef APP-PLUS */
+    page {
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+    }
+    /* #endif */
+
+    .page {
+        flex: 1;
+        width: 750rpx;
+    }
+
+    .swiper {
+        flex: 1;
+        background-color: #007AFF;
+    }
+
+    .swiper-item {
+        flex: 1;
+		/* position: relative; */
+    }
+	
+	.myBox{
+		position: absolute;
+	}
+    .video {
+		width: 100%;
+        flex: 1;
+    }
+</style>

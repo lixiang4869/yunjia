@@ -1,0 +1,770 @@
+<template>
+
+	<div class="page" :style="{ height: height }">
+		<view class="top" >
+			<view class="status_bar"></view>
+				
+			<view class="topBar">
+				<view class="fabuBox" @click="toMePage" v-if="isshow">
+					<!-- <view class="fabuBox" v-if="isshow"> -->
+					<image style="width: 36upx;height: 36upx;" src="../../static/public/redcamera.png"></image>
+					<!-- <text class="fbTxt">发布</text> -->
+				</view>
+				<text class="title" :style="{color:currentindex==1?'#ffffff':'#333333'}">发现</text>
+				<view class="fabuBox" v-if="isshow"></view>
+			</view>
+
+			<scroll-view id="tab-bar" class="scroll-h" :scroll-x="true" :show-scrollbar="false" :enable-flex="true">
+				<view v-for="(tab,index) in tabBars" :key="index" class="uni-tab-item"  :data-current="index" @click="ontabtap(index)">
+					<text :class="currentindex==index ? 'uni-tab-item-title-active' : 'uni-tab-item-title'"  :style="{color:currentindex==1?'#ffffff':'#333333'}">{{tab.name}}</text>
+					<view :class="[currentindex==index?'showImg':'unshowImg']"></view>
+				</view>
+			</scroll-view>
+		</view>
+
+
+
+		<!-- <swiper class="swiper" :current="currentindex" @change="swiperChange"> -->
+		<!-- #ifndef MP-WEIXIN -->
+		<!-- <swiper-item class="swiper-item" > -->
+		<!-- <attention v-if="currentindex==0" :refreshId="refreshId"></attention> -->
+		<!-- </swiper-item> -->
+		<!-- <swiper-item class="swiper-item" > -->
+		<live v-if="currentindex==0" :fixedBtnShow="fixedBtnShow"></live>
+		<!-- </swiper-item> -->
+		<!-- <swiper-item class="swiper-item" > -->
+		<sp v-if="currentindex==1" :isVideoStop="isVideoStop"></sp>
+		
+		<!-- </swiper-item> -->
+		<!-- #endif -->
+		<!-- #ifdef MP-WEIXIN -->
+		<!-- <swiper-item class="swiper-item" v-if="isshow"> -->
+		<!-- <attention v-if="currentindex==0&&isshow"></attention> -->
+		<!-- </swiper-item> -->
+		<!-- <swiper-item class="swiper-item" v-if="isshow"> -->
+		<live v-if="currentindex==0&&isshow" :fixedBtnShow="fixedBtnShow"></live>
+		<!-- </swiper-item> -->
+		<!-- <swiper-item class="swiper-item" v-if="isshow"> -->
+		<wxsp v-if="currentindex==1&&isshow" :isVideoStop="isVideoStop"  style="width: 100%;height: 100%;position: absolute;"></wxsp>
+		
+		<!-- </swiper-item> -->
+		<!-- #endif -->
+
+		<!-- <swiper-item class="swiper-item"> -->
+		<faxian v-if="currentindex==2 || tabBars[currentindex].id=='tc'"></faxian>
+		<!-- #ifdef MP-WEIXIN -->
+		<myCenter v-if="currentindex==3&&isshow" ></myCenter>
+		<!-- #endif -->
+		<!-- #ifndef MP-WEIXIN -->
+		<myCenter v-if="currentindex==3" :refreshId="refreshId"></myCenter>
+		<!-- #endif -->
+		<!-- </swiper-item> -->
+		<!-- </swiper> -->
+		<!-- #ifdef MP||H5 -->
+		<!-- <uni-transition :show="popShow" :modeClass="['fade','slide-top']">
+			<my-pop :height="popHeight"></my-pop>
+		</uni-transition> -->
+		<!-- #endif -->
+		<!-- #ifndef MP||H5 -->
+		<!-- <my-pop v-if="popShow" :height="popHeight"></my-pop> -->
+		<!-- #endif -->
+		<uni-popup ref="popup" type="bottom" @change="changePop">
+			<view class="popBottomBox" :style="{width,height:sysheight * 0.3 + 'px'}">
+				<view class="popTop">
+					<text class="popTitleTxt">选择发布类型</text>
+					<image src="../../static/my/quxiao.png" style="width: 50rpx;height: 50rpx;" @click="closePop"></image>
+				</view>
+				<view class="popContentBtns">
+					<view class="popBtn" @click="tofb">
+						<image style="width: 100rpx;height: 100rpx;" src="https://xin.yiyunoto.com/uploads/static/find/shiping.png"></image>
+						<text class="popBtnTxt">发视频</text>
+					</view>
+					<view class="popBtn" @click="goVideo">
+						<image style="width: 100rpx;height: 100rpx;" src="https://xin.yiyunoto.com/uploads/static/find/zhibo.png"></image>
+						<text class="popBtnTxt">开直播</text>
+					</view>
+				<!-- 	<view class="popBtn" @click="tofb">
+						<image style="width: 100rpx;height: 100rpx;" src="https://xin.yiyunoto.com/uploads/static/find/fashiping.png"></image>
+						<text class="popBtnTxt">拍视频</text>
+					</view> -->
+					<!-- <view class="popBtn" @click="togl">
+						<image style="width: 100rpx;height: 100rpx;" src="https://xin.yiyunoto.com/uploads/static/find/zuopin.png"></image>
+						<text class="popBtnTxt">作品管理</text>
+					</view> -->
+				</view>
+			</view>
+		</uni-popup>
+	</div>
+</template>
+<script>
+	// import sp from './index.nvue'
+	// #ifdef MP-WEIXIN
+	import wxsp from './index.nvue'
+	// #endif
+	// #ifndef MP-WEIXIN
+	import sp from './vertical-swiper/vertical-swiper.nvue'
+	// #endif
+	import myCenter from "./mePage"
+	import live from './video.vue'
+	import attention from './attention.vue'
+	import uniTransition from '@/components/uni-transition/uni-transition.vue'
+
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import faxian from './redpage.vue'
+	export default {
+		components: {
+			faxian,
+			// #ifndef MP-WEIXIN
+			sp,
+			// #endif
+			// #ifdef MP-WEIXIN
+			wxsp,
+			// #endif
+			myCenter,
+			live,
+			attention,
+			uniTransition,
+			uniPopup
+		},
+		data() {
+			return {
+				tabBars: [ {
+						name: '直播',
+						id: 'zb'
+					}, {
+						name: '短视频',
+						id: 'dsp'
+					},
+					{
+						name: '同城',
+						id: 'tc'
+					},
+					{
+						name: '个人中心',
+						id: 'grzx'
+					}
+				],
+				currentindex: 2,
+				url: 'https://xin.yiyunoto.com',
+				sysheight: 0,
+				playCount: 2, //剩余多少视频加载视频列表
+
+				height: '667px',
+				index: 0,
+				width: null,
+				oldIndex: 0,
+				isVideoStop: true, // 控制切换页面视频暂停
+				fixedBtnShow: true,
+				popShow: false,
+				popHeight: null,
+				isshow: false,
+				refreshId: 2,
+				unipopupShop: false
+			}
+		},
+		created() {
+
+			// //#ifdef APP-PLUS
+			// plus.screen.lockOrientation("portrait-primary")
+			// //隐藏subnvue
+			// uni.getSubNVueById('comment').hide()
+			// uni.getSubNVueById('input-box').hide()
+			// //#endif
+			this.sysheight = uni.getSystemInfoSync().windowHeight
+			this.height = `${this.sysheight}px`
+			let width = uni.getSystemInfoSync().windowWidth
+			this.width = `${width}px`
+
+
+		},
+
+
+
+
+		onReady() {
+			// 获取导航栏到底部的剩余高度
+			var _this = this;
+			uni.getSystemInfo({
+				success: (resu) => {
+					const query = uni.createSelectorQuery()
+					query.select('#tab-bar').boundingClientRect()
+					query.exec(function(res) {
+						_this.popHeight = resu.windowHeight - res[0].top;
+						console.log('打印页面的剩余高度', _this.popHeight);
+					})
+				},
+				fail: (res) => {}
+			})
+			// 获取剩余高度结束
+		},
+
+		onHide() {
+			this.isVideoStop = true;
+			this.popShow = false;
+
+		},
+		onShow() {
+			// 短视频是 否 自动播放
+			if (this.currentindex == 2) {
+				this.isVideoStop = false;
+			} else {
+				this.isVideoStop = true;
+			}
+			// 隐藏显示固定按钮
+			if (this.currentindex == 1) {
+				this.fixedBtnShow = true;
+			} else {
+				this.fixedBtnShow = false;
+			}
+			this.isshow = uni.getStorageSync("isshowhongbao", false);
+
+			//#ifndef APP-PLUS
+			if (!this.isshow && this.tabBars.length > 3) {
+
+				this.tabBars=[{name: '同城',
+						id: 'tc'}]
+				this.currentindex = 0;
+			} else if (this.isshow) {
+				this.tabBars = [{
+						name: '直播',
+						id: 'zb'
+					}, {
+						name: '短视频',
+						id: 'dsp'
+					},
+					{
+						name: '同城',
+						id: 'tc'
+					},
+					{
+						name: '个人中心',
+						id: 'grzx'
+					}
+				];
+			}
+			// this.currentindex = 3;
+			//#endif
+			
+			/* 隐藏凸起图标 */
+			// #ifdef APP-PLUS
+			var icon = plus.nativeObj.View.getViewById("icon");
+			setTimeout(function() {
+				
+				icon.show();
+			}, 100);
+			this.isshow = true;
+			// #endif
+		},
+		methods: {
+			changePop(data) {
+				if (this.currentindex != 2) {
+					this.isVideoStop = true;
+				} else {
+					this.isVideoStop = !this.isVideoStop;
+				}
+			},
+			// 显示弹窗
+			toMePage() {
+				console.log(this.isVideoStop);
+				if (this.currentindex != 2) {
+					// if(this.isVideoStop == true){
+					// 	this.$refs.popup.close()
+					// }else{
+					// 	this.$refs.popup.open()
+					// }
+					if (this.unipopupShop) {
+						this.$refs.popup.close()
+					} else {
+						this.$refs.popup.open()
+					}
+					this.unipopupShop = !this.unipopupShop;
+				} else {
+					if (this.isVideoStop == true) {
+						this.$refs.popup.close()
+					} else {
+						this.$refs.popup.open()
+					}
+				}
+			},
+			// 关闭弹窗
+			closePop() {
+				this.$refs.popup.close()
+			},
+			swiperChange(e) {
+				var index = e.target.current || e.detail.current;
+				this.currentindex = index;
+			},
+			ontabtap(e) {
+				if(e==4){
+						var authtoken=uni.getStorageSync('authtoken');
+						if(!authtoken){
+							uni.navigateTo({
+								url:"../My/Login-registration/Login-registration"
+							})
+							return
+						}
+						
+				}
+				this.refreshId = e;
+				if (this.currentindex == e) {
+					return;
+				}
+				this.currentindex = e;
+
+
+				// 是否切换到短视频页面 是 自动播放 否 暂停
+				if (e == 2) {
+					this.isVideoStop = false;
+				} else {
+					this.isVideoStop = true;
+				}
+				// 是否却换到直播列表页面 是 显示固定按钮 否 隐藏固定按钮
+				if (e == 1) {
+					this.fixedBtnShow = true;
+				} else {
+					this.fixedBtnShow = false;
+				}
+				
+				// if (this.tabBars.length == 1) {
+				// 	if (e == 0) {
+				// 		this.currentindex = 3
+				// 	}
+				// }
+
+			},
+
+
+			// 发起直播
+			goVideo() {
+				this.$refs.popup.close()
+				this.isVideoStop = true;
+				var token = uni.getStorageSync("authtoken");
+				if (token == '') {
+					uni.navigateTo({
+						url: '../My/Login-registration/Login-registration'
+					})
+				} else {
+					// 视频认证
+					uni.request({
+						url: this.url + '/api/video/check_a_status',
+						method: "POST",
+						header: {
+							authtoken: token
+						},
+						data: {
+							tid: 1
+						},
+						success(res) {
+							console.log(res);
+							if (res.data.code != 1) {
+								var state = res.data.code == -1 ? true : false;
+								uni.showToast({
+									icon: 'none',
+									title: res.data.msg
+								})
+								uni.navigateTo({
+									url: './identification?state=' + state + '&tid=1'
+								})
+								return;
+							} else {
+								uni.navigateTo({
+									url: './liveSetout?authtoken=' + token
+								})
+							}
+						}
+					})
+				}
+			},
+
+			togl() {
+				this.$refs.popup.close()
+				this.isVideoStop = true;
+				uni.navigateTo({
+					url: '../../pages/newfind/mePage'
+				})
+			},
+			tofb() {
+				this.$refs.popup.close()
+				this.isVideoStop = true;
+				var token = uni.getStorageSync("authtoken");
+				if (token == '') {
+					uni.navigateTo({
+						url: '../../pages/My/Login-registration/Login-registration'
+					})
+				} else {
+					// 视频认证
+					// uni.request({
+					// 	url:this.url+'/api/video/check_a_status',
+					// 	method:"POST",
+					// 	header:{
+					// 		authtoken: token
+					// 	},
+					// 	data:{
+					// 		tid:2
+					// 	},
+					// 	success(res) {
+					// 		console.log(res);
+					// 		if(res.data.code!=1){
+					// 			var state = res.data.code == -1 ? true : false;
+					// 			uni.showToast({
+					// 				icon:'none',
+					// 				title:res.data.msg
+					// 			})
+					// 			uni.navigateTo({
+					// 				url:'../../pages/newfind/identification?state='+state+'&tid=2'
+					// 			})
+					// 			return;
+					// 		}else{
+					uni.navigateTo({
+						url: '../../pages/newfind/buildVideo'
+					})
+					// 	}
+					// 	}
+					// })
+				}
+			}
+		},
+
+
+		watch: {
+			currentindex(newVal, oldVal) {
+				this.refreshId = newVal;
+				this.popShow = false;
+				if (newVal != 2) {
+					this.isVideoStop = true;
+				} else {
+					this.isVideoStop = false;
+				}
+			}
+		}
+
+	}
+</script>
+<style scoped lang="scss">
+	.top {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		
+		flex-direction: column;
+		background-color: #ffffff;
+	}
+
+	.showImg {
+		width: 56rpx;
+		height: 8rpx;
+		background-color: #FF502E;
+		border-radius: 4rpx;
+		margin-top: 13rpx;
+		opacity: 1;
+	}
+
+	.unshowImg {
+		width: 56rpx;
+		height: 8rpx;
+		background-color: #FF502E;
+		border-radius: 4rpx;
+		margin-top: 13rpx;
+		opacity: 0;
+	}
+
+	/* 顶部tabbar */
+	.nav-bar {
+		position: relative;
+		height: 90upx;
+	}
+
+	.uni-tab-item-title-active {
+		font-size: 34upx;
+		font-weight: 600;
+		color: #333;
+		
+		flex-wrap: nowrap;
+		/* #ifndef APP-PLUS-NVUE */
+		white-space: nowrap;
+		/* #endif */
+	}
+
+	.scroll-h {
+		align-items: center;
+		/* background-color: #e83e25; */
+		width: 750upx;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		
+		z-index: 99999;
+		height: 100rpx;
+		flex-direction: row;
+		/* #ifndef APP-PLUS-NVUE */
+		white-space: nowrap;
+		/* #endif */
+		/* flex-wrap: nowrap; */
+		/* border-color: #cccccc;
+		border-bottom-style: solid;
+		border-bottom-width: 1px; */
+	}
+
+	.line-h {
+		height: 1rpx;
+		background-color: #cccccc;
+	}
+
+	.itemImg {
+		padding-left: 20rpx;
+		padding-right: 20rpx;
+		/* #ifndef APP-PLUS-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.uni-tab-item {
+		/* #ifndef APP-PLUS-NVUE */
+		display: flex;
+		/* #endif */
+		flex-wrap: nowrap;
+		/* display: flex; */
+		flex-direction: column;
+		align-items: center;
+		padding-left: 20rpx;
+		padding-right: 20rpx;
+	}
+
+	.uni-tab-item-title {
+		color: #333333;
+		font-weight: 600;
+		font-size: 34upx;
+		
+		flex-wrap: nowrap;
+		/* #ifndef APP-PLUS-NVUE */
+		white-space: nowrap;
+		/* #endif */
+	}
+
+	.swiper {
+		flex: 1;
+		/* background-color: #000; */
+	}
+
+	.swiper-item {
+		flex: 1;
+	}
+
+	.video {
+		flex: 1;
+	}
+
+	.video-box {
+		flex: 1;
+	}
+
+	.cover-view-center {
+		position: absolute;
+		justify-content: center;
+		align-items: center;
+		opacity: 0.1;
+		z-index: 999;
+	}
+
+	.cover-view-left {
+		position: absolute;
+		margin-left: 10upx;
+		width: 500upx;
+		bottom: 120upx;
+		z-index: 9999;
+		font-size: 16px;
+		color: #FFFFFF;
+		/* #ifndef APP-PLUS-NVUE */
+		white-space: pre-wrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		/* #endif */
+	}
+
+	.left-view {
+		margin-bottom: 20upx;
+	}
+
+	.left-text {
+		font-size: 16px;
+		color: #FFFFFF;
+	}
+
+	.avater {
+		border-radius: 50upx;
+		border-color: #fff;
+		border-style: solid;
+		border-width: 2px;
+	}
+
+	.cover-view-right {
+		position: absolute;
+		bottom: 160upx;
+		right: 20upx;
+		/* #ifndef APP-PLUS-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		z-index: 9999;
+	}
+
+	.right-text-avater {
+		position: absolute;
+		font-size: 14px;
+		top: 80upx;
+		left: 30upx;
+		height: 40upx;
+		width: 40upx;
+		background-color: #DD524D;
+		color: #FFFFFF;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 40upx;
+		z-index: 999;
+	}
+
+	.avater-icon {
+		height: 40upx;
+		width: 40upx;
+
+		color: #fff;
+		background-color: #DD524D;
+		border-radius: 50%;
+		position: absolute;
+		left: 30upx;
+		top: -20upx;
+	}
+
+	.right-text {
+		text-align: center;
+		font-size: 14px;
+		color: #FFFFFF;
+		margin-bottom: 50upx;
+		height: 20px;
+	}
+
+	.img {
+		height: 100upx;
+		width: 100upx;
+		opacity: 0.9;
+	}
+
+	.page {
+		background-color: #FFFFFF;
+		/* #ifndef APP-PLUS-NVUE */
+		/* display: flex;
+		flex-direction: column; */
+		/* #endif */
+		flex: 1;
+	}
+
+	.status_bar {
+		/* #ifndef APP-PLUS-NVUE */
+		height: var(--status-bar-height);
+		/* #endif */
+		/* #ifdef APP-PLUS-NVUE */
+		height: 60upx;
+		/* #endif */
+		width: 750rpx;
+		/* background-color: #e83e25; */
+	}
+
+	.topBar {
+		height: 90rpx;
+		width: 750rpx;
+		z-index: 99999;
+		/* background-color: #e83e25; */
+
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 20rpx;
+		/* #ifndef APP-PLUS-NVUE */
+		box-sizing: border-box;
+		display: flex;
+		/* #endif */
+
+	}
+
+	.title {
+		text-align: center;
+		flex: 1;
+		font-size: 38rpx;
+		font-weight: 700;
+		color: #FFFFFF;
+	}
+
+	.fabuBox {
+		width: 80rpx;
+		height: 90%;
+		/* #ifndef APP-PLUS-NVUE */
+		display: flex;
+		/* #endif */
+
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.fbTxt {
+		font-size: 26rpx;
+		color: #FFFFFF;
+		margin-top: 5%;
+	}
+
+	.popBottomBox {
+		background-color: #FFFFFF;
+		border-top-left-radius: 20rpx;
+		border-top-right-radius: 20rpx;
+	}
+
+	.popTop {
+		height: 90rpx;
+		/* #ifndef APP-PLUS-NVUE */
+		display: flex;
+		box-sizing: border-box;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20rpx;
+	}
+
+	.popTitleTxt {
+		font-weight: 700;
+		font-size: 38rpx;
+		color: #333333;
+	}
+
+	.popContentBtns {
+		height: 180rpx;
+
+		flex-direction: row;
+		/* justify-content: space-between; */
+		align-items: center;
+		padding: 0 20rpx;
+		/* #ifndef APP-PLUS */
+		box-sizing: biorder-box;
+		display: flex;
+		/* #endif */
+	}
+
+	.popBtn {
+		width: 150rpx;
+		height: 180rpx;
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.popBtnTxt {
+		font-size: 28rpx;
+		color: #666666;
+		margin-top: 10rpx;
+	}
+</style>

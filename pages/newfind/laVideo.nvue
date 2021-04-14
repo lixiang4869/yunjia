@@ -1,0 +1,764 @@
+<template>
+	<view :style="{width:width,height:height,position:'relative'}">
+		<view class="status_bar">
+			<!-- 这里是状态栏 -->
+		</view>
+		<video class="laVideo" id="myVideo"
+		  :style="{width:width,height:height}"
+		  :autoplay="true"
+		  :controls="false"
+		  :poster="url+liveInfo.img"
+		  @error="videoErrorCallback"
+		  :src="vurl">
+		</video>
+		<cover-view class="box" :style="{width:width,height:height}" @click="onSet">
+			<view class="top" :style="{width:width}">
+				<view class="upInfo">
+					<view class="userInfo">
+						<image class="head" :src="liveInfo.headimg ? url+liveInfo.headimg : '../../static/video/defaultHead.png'"></image>
+						<view class="userInfoRight">
+							<text class="infoTxt">{{liveInfo.nickname}}</text>
+							<text class="infoTxt">本场点赞{{up_num}}</text>
+						</view>
+					</view>
+					<text class="attenTxt" @click="attentionBtn" v-if="attentionState">已关注</text>
+					<text class="attenTxt" @click="attentionBtn" v-if="!attentionState">关注</text>
+				</view>
+				<text class="peopleNum">{{totalNum}}</text>
+			</view>
+			
+			<scroll-view scroll-y :show-scrollbar="false" class="msgBox" :scroll-into-view="'msg'+(sayMsg.length-1)">
+				<view class="msgItem" v-for="(item,index) in sayMsg" :key="index" :id="'msg'+index">
+					<text :style="{maxWidth:parseInt(width)-50+'px'}" class=" comm" space="nbsp">{{item.nickname}}{{item.content}}</text>
+				</view>
+			</scroll-view>
+			
+			<view v-if="shopBoxShow" class="shopBox">
+				<swiper class="shopInfoBox" v-if="goodShop.length>0" :indicator-dots="false" :autoplay="true" :interval="5000" :duration="500">
+					<swiper-item class="shopInfoBox" v-for="(item,index) in goodShop" :key="index">
+						<view class="shopImgBox">
+							<image class="shopImg" :src="url+item.img"></image>
+							<text class="shopTxt">{{item.name}}</text>
+							<text class="closeShop" @click="shopBoxHide">×</text>
+						</view>
+						<view class="priceBox">
+							<text class="price">￥ {{item.price}}</text>
+						</view>
+					</swiper-item>
+				</swiper>
+			</view>
+			
+			<view class="btmBox" :style="{width:width}">
+				<input class="inp" type="text" placeholder="说点什么..." :adjust-position="false" 
+				  @focus="keyHeight" v-model="bulidInfo"/>
+				  <view class="shopCarBox">
+				  	<image class="shopCar" src="../../static/shop/car1.png"></image>
+				  </view>
+				<text class="closePage" @click="closePage">×</text>
+			</view>
+			
+			<view class="keyShowInp" v-if="keyShow" :style="{width:width,bottom:keyY+'px'}">
+				<input class="showTxt" type="text" placeholder="说点什么..." :style="{width:parseInt(width)*0.6+'px'}" 
+				  :focus="true" :adjust-position="false" @blur="keyHeid" @confirm="clickRequest" v-model="bulidInfo" />
+				<image class="faceImg" src="../../static/video/defaultHead.png"></image>
+				<image class="sendImg" src="../../static/video/sendMsg.png" @click.stop="clickRequest"></image>
+			</view>
+			<text class="toast" :style="{width:width}" v-if="liveStart">{{hint}}</text>
+		</cover-view>
+	</view>
+</template>
+
+<script>
+	import request from '../../store/http.js';
+	export default {
+		data(){
+			return{
+				width:'',
+				height:'',
+				vurl:'',
+				url:'',
+				authtoken:'',
+				attentionState:false,
+				liveInfo:{},
+				goodShop:[],
+				bulidInfo:'',
+				infoMsgUrl:'',
+				isLogin:false,
+				nickname:'',
+				streamname:'',
+				upStreamname:'',
+				roomId:'',
+				socketTask: null,
+				// 确保websocket是打开状态
+				is_open_socket: false,
+				sayMsg:[{nickname:'平台提示: ',content:' 请您再拍下时确认购买商品和主播实际描述一致，禁止线下交易，谨慎上当受骗！'}],
+				totalNum:0,
+				isRequestAttention:true,
+				saveSetTimeout:'',
+				keepName:'',
+				keepShow:false,
+				iszan:false,
+				liveStart:false,
+				repRequest:'',
+				videoContext:'',
+				isInp:false,
+				up_num:0,
+				keyY:211,
+				keyShow:false,
+				touchStartTime: 0, // 触摸开始时间   用来判断是否是双击
+				shopBoxShow:true,
+				videoStop:true,
+				hint:'直播未开启'
+			}
+		},
+		watch:{
+			videoStop(newVal,oldVal){
+				if(newVal){
+					console.log(newVal)
+					this.videoContext.stop();
+					this.liveStart = false;
+					this.vurl = '';
+					this.hint = '主播已下线';
+				}
+			}
+		},
+		async onLoad(options) {
+			this.url = this.$store.state.url;
+			this.getVideoXY();
+			this.roomId = options.id;
+			this.streamname = options.streamname;
+		},
+		onShow() {
+			/* 隐藏凸起图标 */
+			// #ifdef APP-PLUS
+			var icon = plus.nativeObj.View.getViewById("icon");
+			setTimeout(function() {
+				icon.hide();
+			}, 100);
+			// #endif
+			uni.setKeepScreenOn({
+			    keepScreenOn: true
+			});
+			this.infoMsgUrl = this.$store.state.storageurl
+		},
+		async onReady() {
+			this.videoContext = uni.createVideoContext('myVideo')
+			this.getUserInfo();
+		},
+		onHide() {
+			// this.sendLogingOut();
+			// this.closeSocket();
+			clearInterval(this.repRequest);
+		},
+		// 关闭websocket【必须在实例销毁之前关闭,否则会是underfined错误】
+		beforeDestroy() {
+			this.sendLogingOut();
+			this.closeSocket();
+			clearInterval(this.repRequest);
+		},
+		methods:{
+			// 获取视口宽高
+			getVideoXY(){
+				let res = uni.getSystemInfoSync()
+				this.width = res.windowWidth+'px';
+				this.height = res.windowHeight+'px';
+			},
+			// 获取视频播放地址
+			getVideoURL(id,streamname){
+				var that = this;
+				uni.request({
+					url:that.url+"/api/liveApi/getPlayUrl",
+					method:"POST",
+					data:{
+						id,
+						hnum:streamname
+					},
+					header:{
+						authtoken:that.authtoken
+					},
+					success(res) {
+						console.log(res);
+						if(res.data.data.room){
+							that.liveInfo.headimg = res.data.data.room.headimg;
+							that.liveInfo.title = res.data.data.room.title;
+							that.liveInfo.nickname = res.data.data.room.nickname;
+							that.liveInfo.img = res.data.data.room.img;
+							that.liveInfo.up_num = res.data.data.room.up_num;
+							that.upStreamname = res.data.data.room.streamname;
+							that.up_num = res.data.data.room.up_num;
+						}
+						that.attentionState = res.data.data.keep==1 ? true : false;
+						console.log("attentionState",that.attentionState )
+						that.goodShop = res.data.data.good;
+						that.shopCartShow = that.goodShop.length > 0 ? true : false
+						if(!res.data.data.room.living){
+							that.videoContext.stop();
+							that.liveStart = true;
+							that.repRequest = setInterval(()=>{
+								that.isLiveRequest();
+							},10000)
+						}else{
+							that.vurl = res.data.data.vurl;
+							that.videoStop = false;
+							console.log(res.data.data)
+						}
+					}
+				})
+			},
+			videoErrorCallback: function(e) {
+			},
+			// 检查是否发起直播
+			isLiveRequest(){
+				var that = this;
+				uni.request({
+					url:that.url+'/api/liveapi/checkurl',
+					method:"POST",
+					data:{
+						hnum:that.upStreamname
+					},
+					success(res) {
+						console.log(res)
+						if(res.data.code==1){
+							clearInterval(that.repRequest);
+							that.videoStop = false;
+							that.vurl = res.data.data.vurl;
+							that.videoContext.play();
+							that.liveStart = false;
+						}
+					}
+				})
+			},
+			// 关注按钮事件
+			attentionBtn(){
+				var token = uni.getStorageSync("authtoken");
+				this.attentionState = !this.attentionState;
+				var that = this;
+				if(this.saveSetTimeout){
+					clearTimeout(this.saveSetTimeout);
+				}
+				this.saveSetTimeout = setTimeout(()=>{
+					if(this.attentionState){
+						uni.request({
+							url:this.url+'/api/liveapi/keep',
+							method:"POST",
+							header:{
+								authtoken:token
+							},
+							data:{
+								oid:this.roomId
+							},
+							success(res) {
+								console.log(res);
+								if(res.data.data.code!=-1){
+									if (that.is_open_socket) {
+										// websocket的服务器的原理是:发送一次消息,同时返回一组数据【否则服务器会进去死循环崩溃】
+										that.socketTask.send({
+											data: '{"type":"keep","to_client_id":"all","to_client_name":"all","content":"'+that.nickname+'"}',
+											async success() {
+												console.log("消息发送成功");
+											}
+										});
+									}
+								}
+							}
+						})
+					}else{
+						uni.request({
+							url:this.url+'/api/liveapi/keepoff',
+							method:"POST",
+							header:{
+								authtoken:token
+							},
+							data:{
+								oid:this.roomId
+							},
+							success(res) {
+								console.log(res);
+							}
+						})
+					}
+				},800)
+			},
+			// 分享按钮事件
+			shareLive(){
+				console.log("分享");
+			},
+			// 返回上一个页面
+			closePage(){
+				clearInterval(this.repRequest);
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			// 进入这个页面的时候创建websocket连接【整个页面随时使用】
+			connectSocketInit() {
+				var that = this;
+				that.socketTask = uni.connectSocket({
+					url: 'wss://videos.yiyunoto.com/wss',
+					success(data) {
+						console.log("websocket连接成功");
+						that.is_open_socket = true;
+					},
+				});
+			 
+				// 消息的发送和接收必须在正常连接打开中,才能发送或接收【否则会失败】
+				that.socketTask.onOpen((res) => {
+					console.log("WebSocket连接正常打开中...！");
+					console.log(that.nickname)
+					that.is_open_socket = true;
+					// 注：只有连接正常打开中 ，才能正常成功发送消息
+					console.log(that.nickname,that.roomId)
+					that.socketTask.send({
+						data:'{"type":"login", "client_name":"'+that.nickname+'", "room_id":"'+that.roomId+'"}',
+						async success() {
+							console.log("消息发送成功");
+						},
+					});
+					// 注：只有连接正常打开中 ，才能正常收到消息
+					that.socketTask.onMessage((res) => {
+						console.log(JSON.parse(res.data));
+						var obj = JSON.parse(res.data);
+						if(that.sayMsg.length >= 100){
+							var num = that.sayMsg.length - 100;
+							if(num > 0){
+								that.sayMsg = that.sayMsg.splice(99,num);
+							}
+						}
+						if(obj.type === "say"){
+							that.sayMsg.unshift({nickname:obj.from_client_name+' : ',content:obj.content})
+						}else if(obj.type === "login"){
+							that.totalNum = obj.total;
+							that.sayMsg.unshift({nickname:obj.client_name,content:' : 进入了直播间'})
+						}else if(obj.type === "keep"){
+							that.keepName = obj.from_client_name;
+							that.keepShow = true;
+							setTimeout(()=>{
+								that.keepShow = false;
+							},2000)
+						}else if(obj.type == 'leave'){
+							that.totalNum = obj.total;
+						}else if(obj.type == 'stop'){
+							console.log(1111111111111)
+							that.videoStop = true;
+						}
+					});
+				})
+				// 这里仅是事件监听【如果socket关闭了会执行】
+				that.socketTask.onClose(() => {
+					console.log("已经被关闭了")
+				})
+			},
+			// 关闭websocket【离开这个页面的时候执行关闭】
+			closeSocket() {
+				var that = this;
+				that.socketTask.close({
+					success(res) {
+						that.is_open_socket = false;
+						console.log("关闭成功", res)
+					},
+					fail(err) {
+						console.log("关闭失败", err)
+					}
+				})
+			},
+			sendLogingOut(){
+				var that = this;
+				if (that.is_open_socket) {
+					// websocket的服务器的原理是:发送一次消息,同时返回一组数据【否则服务器会进去死循环崩溃】
+					that.socketTask.send({
+						data: '{"type":"leave", "client_name":"'+that.nickname+'", "room_id":"'+that.roomId+'"}',
+						success() {
+							console.log("退出消息发送成功");
+						},
+					});
+				}
+			},
+			// 点击发送
+			clickRequest() {
+				var that = this;
+				if (that.is_open_socket) {
+					// websocket的服务器的原理是:发送一次消息,同时返回一组数据【否则服务器会进去死循环崩溃】
+					that.socketTask.send({
+						data: '{"type":"say","to_client_id":"all","to_client_name":"all","content":"'+that.bulidInfo+'"}',
+						async success() {
+							that.bulidInfo = '';
+							uni.hideKeyboard()
+							console.log("消息发送成功");
+						},
+					});
+				}
+			},
+			
+			// 获取用户昵称
+			getUserInfo(){
+				var authtoken = uni.getStorageSync("authtoken");
+				this.authtoken = authtoken;
+				if(authtoken != ''){
+					this.isLogin = true
+					request.urlRequest(
+						this.url + "/api/member/index", {}, {
+							authtoken: authtoken
+						},
+						'POST',
+						(res) => {
+							if (res.data.code == 1) {
+								this.nickname = res.data.data.meminfo.nickname || res.data.data.meminfo.phone;
+								this.getVideoURL(this.roomId,this.streamname);
+								this.connectSocketInit();
+							} else {
+								uni.showToast({
+									title: res.data.msg,icon:"none"
+								})
+							}
+						}
+					)
+				}else{
+					this.isLogin = false;
+				}
+			},
+			// 点赞
+			clickZan(){
+				var token = uni.getStorageSync("authtoken");
+				var that = this;
+				that.iszan = true;
+				that.up_num++;
+				uni.request({
+					url:this.url+'/api/liveapi/upnum',
+					method:"POST",
+					data:{
+						oid:this.roomId
+					},
+					success(res) {
+						console.log(res);
+					}
+				})
+			},
+			// 添加购物车
+			addShopCart(shopid){
+				uni.navigateTo({
+					url:'../Home/storDetails/storeDetails?shopId='+shopid
+				})
+			},
+			keyHeight(e){
+				this.keyShow = true;
+				this.keyY = e.detail.height+70;
+			},
+			keyHeid(){
+				this.keyShow = false;
+			},
+			//判断是否是双击
+			onSet: function(e) {
+				console.log(e)
+				if (this.touchStartTime == 0) {
+					this.touchStartTime = new Date().getTime()
+				} else {
+					if (new Date().getTime() - this.touchStartTime <= 300) {
+						this.setMeau = true
+						this.clickZan();
+						console.log('这是双击')
+					}
+					this.touchStartTime = 0
+				}
+			},
+			// 商品推荐隐藏
+			shopBoxHide(){
+				this.shopBoxShow=false;
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+/* 去掉刘海 */
+.status_bar {
+	/* #ifndef APP-PLUS */
+	height: var(--status-bar-height);
+	/* #endif */
+	padding-top: 60upx;
+}
+
+.laVideo{
+	background-color: #fff;
+}
+
+.box{
+	position: absolute;
+	/* #ifndef APP-PLUS */
+	box-sizing:border-box;
+	/* #endif */
+}
+.top{
+	/* #ifndef APP-PLUS */
+	box-sizing:border-box;
+	display: flex;
+	box-sizing:border-box;
+	/* #endif */
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 40px;
+	padding: 20upx 0;
+}
+.upInfo{
+	width: 202px;
+	height: 45px;
+	border-radius: 40px;
+	background-color: rgba($color: #000000, $alpha: 0.3);
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1px;
+}
+.head{
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+}
+.userInfo{
+	width: 130px;
+	height: 40px;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+.userInfoRight{
+	margin-left: 6px;
+}
+.infoTxt{
+	color: #fff;
+	font-size: 20upx;
+	margin: 2px 0;
+}
+.attenTxt{
+	padding: 10px 15px;
+	font-size: 28upx;
+	background-color: #fff;
+	color: #FE0074;
+	border-radius: 20px;
+}
+.peopleNum{
+	background-color: rgba($color: #000000, $alpha: 0.3);
+	color: #fff;
+	font-size: 26upx;
+	padding: 10px 15px;
+	border-radius: 20px;
+}
+
+.btmBox{
+	height: 50px;
+	position: absolute;
+	bottom: 20px;
+	padding: 0 20px;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	box-sizing: border-box;
+	/* #endif */
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.inp{
+	width: 140px;
+	height: 40px;
+	border-radius: 25px;
+	background-color: rgba($color: #d0d0d0, $alpha: 0.4);
+	padding: 0 10px;
+	/* #ifndef APP-PLUS */
+	box-sizing:border-box;
+	/* #endif */
+	font-size: 26upx;
+}
+
+.closePage{
+	/* #ifndef APP-PLUS */
+	display: inline-block;
+	/* #endif */
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	background-color: rgba($color: #000000, $alpha: 0.3);
+	color: #fff;
+	border-radius: 20px;
+}
+
+.msgBox{
+	height: 300px;
+	/* #ifndef APP-PLUS */
+	box-sizing:border-box;
+	/* #endif */
+	padding: 0 20upx;
+	position: absolute;
+	bottom: 90px;
+	z-index:99999;
+}
+.msgItem{
+	background-color: rgba($color: #000000, $alpha: 0.3);
+	border-radius: 20px;
+	padding: 10upx 30upx;
+	/* #ifndef APP-PLUS */
+	box-sizing:border-box;
+	/* #endif */
+	margin: 10px 0;
+}
+.nickName{
+	font-size: 15px;
+	color: #A1DDF1;
+	/* #ifndef APP-PLUS */
+	display: inline;
+	/* #endif */
+}
+.comm{
+	font-size: 15px;
+	color: #fff;
+}
+.keyShowInp{
+	height: 50px;
+	background-color: #fff;
+	position: absolute;
+	bottom: 0;
+	padding: 0 20px;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	box-sizing:border-box;
+	/* #endif */
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 1;
+}
+.showTxt{
+	height: 50px;
+	font-size: 26upx;
+	background-color: #fff;
+	color: #B0B0B0;
+	padding-left: 10px;
+	/* #ifndef  APP-PLUS */
+	box-sizing:border-box;
+	/* #endif */
+}
+.faceImg{
+	width: 30px;
+	height: 30px;
+}
+.sendImg{
+	width: 26px;
+	height: 26px;
+}
+.shopCarBox{
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background-color: rgba($color: #000000, $alpha: 0.3);
+	/* #ifndef  APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.shopCar{
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+}
+
+
+.shopBox{
+	width: 180rpx;
+	height: 180rpx;
+	position: absolute;
+	right: 30rpx;
+	bottom: 170rpx;
+	z-index: 99999;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.shopInfoBox{
+	width: 180rpx;
+	height: 180rpx;
+	background-color: #fff;
+	// position: absolute;
+	// right: 10px;
+	// bottom: 90px;
+	z-index:2;
+	border-radius: 20upx;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.shopImgBox{
+	width: 160rpx;
+	height: 120rpx;
+}
+.shopImg{
+	width: 160rpx;
+	height: 120rpx;
+	border-radius: 5rpx;
+}
+.shopTxt{
+	/* #ifndef  APP-PLUS */
+	display: inline-block;
+	box-sizing:border-box;
+	/* #endif */
+	width: 180rpx;
+	height: 60rpx;
+	background-color: rgba($color: #000000, $alpha: 0.3);
+	margin-top: -30rpx;
+	line-height: 30rpx;
+	font-size: 14rpx;
+	color: #fff;
+	padding: 0 5rpx;
+}
+.closeShop{
+	width: 25rpx;
+	height: 25rpx;
+	background-color: rgba($color: #000000, $alpha: 0.3);
+	position: absolute;
+	right: 0;top: 0;
+	text-align: center;
+	line-height: 24rpx;
+	color: #fff;
+	border-radius: 5rpx;
+}
+.priceBox{
+	width: 180rpx;
+	height: 50rpx;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	align-items: center;
+	margin-left: 10rpx;
+}
+.price{
+	font-size: 26rpx;
+	color: #f00;
+}
+.toast{
+	color: #FFFFFF;
+	position: absolute;
+	font-size: 40upx;
+	text-align: center;
+	font-weight: 600;
+	/* #ifdef H5||MP */
+	top: 280upx;
+	/* #endif */
+	/* #ifndef H5||MP */
+	top: 300upx;
+	/* #endif */
+}
+</style>

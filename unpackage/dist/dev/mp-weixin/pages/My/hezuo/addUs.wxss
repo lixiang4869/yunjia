@@ -1,0 +1,103 @@
+
+.content {
+
+	position: relative;
+}
+.bgbox{
+	 margin-top: 14rpx;
+	width: 300rpx;
+	height: 80rpx;
+	background: -webkit-gradient(linear, left top, right top, from(#EA38CB), to(#3DDFDA));
+	background: -webkit-linear-gradient(left, #EA38CB 0%, #3DDFDA 100%);
+	background: linear-gradient(90deg, #EA38CB 0%, #3DDFDA 100%);
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.bgbox2{
+	width: 260rpx;
+	height: 80rpx;
+	background: #ffffff;
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.item {
+	margin-top: 30rpx;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+	height: 120rpx;
+	width: calc(100% - 60rpx);
+	background-color: rgba(255, 255, 255, 0.35);
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.left {
+	margin-left: 32rpx;
+	font-size: 36rpx;
+	color: #FFFFFF;
+}
+.btn {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	margin-right: 22rpx;
+	text-align: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	line-height: 60rpx;
+	font-size: 30rpx;
+	font-weight: 500;
+	color: #FFFFFF;
+	width: 216rpx;
+	height: 60rpx;
+	background: #8E84EA;
+	-webkit-border-radius: 30rpx;
+	        border-radius: 30rpx;
+}
+

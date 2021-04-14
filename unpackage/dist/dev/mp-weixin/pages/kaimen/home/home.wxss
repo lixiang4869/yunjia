@@ -1,0 +1,678 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+.search.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 88rpx;
+}
+.search .soso.data-v-23e8ff1c {
+  margin-left: 24rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 573rpx;
+  height: 60rpx;
+  background: #eee;
+  -webkit-border-radius: 30rpx;
+          border-radius: 30rpx;
+}
+.search .soso image.data-v-23e8ff1c {
+  margin-left: 33rpx;
+  width: 31rpx;
+  height: 29rpx;
+  margin-right: 20rpx;
+}
+.search .soso input.data-v-23e8ff1c {
+  width: 200rpx;
+  height: 26rpx;
+  font-size: 26rpx;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: #999999;
+  text-align: left;
+}
+.search .quxiao.data-v-23e8ff1c {
+  margin: auto 20rpx 30rpx 15rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.search .quxiao image.data-v-23e8ff1c {
+  width: 47rpx;
+  height: 47rpx;
+}
+.search .quxiao .news.data-v-23e8ff1c {
+  width: 34rpx;
+  height: 16rpx;
+  background: white;
+  -webkit-border-radius: 8rpx;
+          border-radius: 8rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 13rpx;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: #0085f9;
+  margin-left: -18rpx;
+  margin-top: -10rpx;
+}
+.home.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.home .header.data-v-23e8ff1c {
+  background: -webkit-linear-gradient(317deg, #FF6178 0%, #FF502E 100%);
+  background: linear-gradient(133deg, #FF6178 0%, #FF502E 100%);
+  width: 100%;
+}
+.home .header .header-box.data-v-23e8ff1c {
+  width: 100%;
+  height: 100rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .header .header-box .img1.data-v-23e8ff1c {
+  margin-left: 16rpx;
+  margin-right: 19rpx;
+  width: 28rpx;
+  height: 33rpx;
+}
+.home .header .header-box .addr.data-v-23e8ff1c {
+  font-size: 30rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: white;
+}
+.home .header .header-box .img2.data-v-23e8ff1c {
+  margin-left: 30rpx;
+  width: 11rpx;
+  height: 18rpx;
+}
+.home .header .tabBar_box.data-v-23e8ff1c {
+  margin-top: 20rpx;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.home .header .tabBar_box .TabBar.data-v-23e8ff1c {
+  width: 94%;
+  height: 60rpx;
+  white-space: nowrap;
+}
+.home .header .tabBar_box .TabBar .grid.data-v-23e8ff1c {
+  padding: 0 30rpx;
+  height: 60rpx;
+  display: inline-block;
+  font-size: 34rpx;
+}
+.home .header .tabBar_box .TabBar .grid .text.data-v-23e8ff1c {
+  width: 80rpx;
+  height: 50rpx;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #ffffff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .header .tabBar_box .TabBar .grid .text.on.data-v-23e8ff1c {
+  font-size: 32rpx;
+  color: #ffffff;
+  border-bottom: 6rpx solid #ffffff;
+}
+.home .header .tabBar_box .zhedie.data-v-23e8ff1c {
+  width: 6%;
+}
+.home .header .tabBar_box .zhedie image.data-v-23e8ff1c {
+  width: 39rpx;
+  height: 29rpx;
+}
+.home .section.data-v-23e8ff1c {
+  width: 100%;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.home .section .index_swiper.data-v-23e8ff1c {
+  margin-top: 20rpx;
+  width: 100%;
+  padding-bottom: 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.home .section .index_swiper .swiper_box.data-v-23e8ff1c {
+  height: 286rpx;
+}
+.home .section .index_swiper .swiper-item.data-v-23e8ff1c {
+  margin: auto 3% auto;
+  width: 94%;
+  height: 100%;
+}
+.home .section .index_swiper .swiper-item image.data-v-23e8ff1c {
+  width: 100%;
+  height: 100%;
+}
+.home .section .tuijian.data-v-23e8ff1c {
+  width: 100%;
+  height: 80rpx;
+  background: #FFFFFF;
+}
+.home .section .tuijian .toutiao.data-v-23e8ff1c {
+  width: 94%;
+  margin: auto 3% auto;
+  height: 60rpx;
+  background: #f4f4f4;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.home .section .tuijian .toutiao .left.data-v-23e8ff1c {
+  width: 200rpx;
+  font-size: 31rpx;
+  font-family: zihun35hao;
+  font-weight: bold;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .section .tuijian .toutiao .left .tou.data-v-23e8ff1c {
+  color: #DB2F1C;
+}
+.home .section .tuijian .toutiao .left .tui.data-v-23e8ff1c {
+  color: #232323;
+}
+.home .section .tuijian .toutiao .left .red.data-v-23e8ff1c {
+  margin-left: 8rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #DB2F1C;
+  -webkit-border-radius: 8rpx;
+          border-radius: 8rpx;
+}
+.home .section .tuijian .toutiao .con.data-v-23e8ff1c {
+  width: 460rpx;
+  font-size: 26rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: #0f0f0f;
+}
+.home .section .tuijian .toutiao image.data-v-23e8ff1c {
+  width: 12rpx;
+  height: 23rpx;
+}
+.home .section .openProperty.data-v-23e8ff1c {
+  width: 100%;
+  background: #FFFFFF;
+}
+.home .section .openProperty .property.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  width: 94%;
+  margin: auto 3% auto;
+  padding-top: 30rpx;
+}
+.home .section .openProperty .property .menjin.data-v-23e8ff1c {
+  margin-right: 10rpx;
+}
+.home .section .openProperty .property .menjin image.data-v-23e8ff1c {
+  width: 241rpx;
+  height: 383rpx;
+}
+.home .section .openProperty .property .wuye.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.home .section .openProperty .property .wuye .xiaoqu.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.home .section .openProperty .property .wuye .xiaoqu .renlian.data-v-23e8ff1c {
+  margin-right: 10rpx;
+}
+.home .section .openProperty .property .wuye .xiaoqu .renlian image.data-v-23e8ff1c {
+  width: 191rpx;
+  height: 185rpx;
+}
+.home .section .openProperty .property .wuye .xiaoqu .dianti image.data-v-23e8ff1c {
+  width: 258rpx;
+  height: 185rpx;
+}
+.home .section .openProperty .property .wuye .other.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.home .section .openProperty .property .wuye .other .parking.data-v-23e8ff1c {
+  margin-right: 10rpx;
+}
+.home .section .openProperty .property .wuye .other .parking image.data-v-23e8ff1c {
+  width: 258rpx;
+  height: 185rpx;
+}
+.home .section .openProperty .property .wuye .other .more image.data-v-23e8ff1c {
+  width: 191rpx;
+  height: 185rpx;
+}
+.home .section .jiaju.data-v-23e8ff1c {
+  width: 100%;
+  background: #FFFFFF;
+  height: 78rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .section .jiaju .zhi.data-v-23e8ff1c {
+  margin-left: 16rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.home .section .jiaju .zhi .img.data-v-23e8ff1c {
+  margin-right: 20rpx;
+  width: 32rpx;
+  height: 36rpx;
+}
+.home .section .jiaju .zhi .zhineng.data-v-23e8ff1c {
+  width: 160rpx;
+  height: 30rpx;
+  font-size: 30rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: #0f0f0f;
+}
+.home .section .jiaju .chakan.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .section .jiaju .chakan .all.data-v-23e8ff1c {
+  width: 100rpx;
+  font-size: 24rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: #999999;
+}
+.home .section .jiaju .chakan image.data-v-23e8ff1c {
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+  width: 12rpx;
+  height: 23rpx;
+}
+.home .section .imgbanner.data-v-23e8ff1c {
+  background: #FFFFFF;
+  width: 100%;
+  padding-top: 10rpx;
+  margin: 0 auto;
+}
+.home .section .imgbanner .swiper.data-v-23e8ff1c {
+  width: 94%;
+  margin: auto 3% auto;
+}
+.home .section .imgbanner .swiper .imgsBannerBox.data-v-23e8ff1c {
+  position: relative;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList .list.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  height: 170rpx;
+  margin-right: 20rpx;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList .list image.data-v-23e8ff1c {
+  width: 330rpx;
+  height: 170rpx;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList .list image.data-v-23e8ff1c:last-child {
+  margin-right: 0;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList2.data-v-23e8ff1c {
+  z-index: 999;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  margin-top: -128rpx;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList2 .list.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  height: 170rpx;
+  margin-right: 20rpx;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList2 .list .shebei.data-v-23e8ff1c {
+  width: 330rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin-left: 26rpx;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList2 .list .shebei .name.data-v-23e8ff1c {
+  font-size: 26rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: white;
+  line-height: 40rpx;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList2 .list .shebei .node.data-v-23e8ff1c {
+  font-size: 22rpx;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: white;
+  line-height: 40rpx;
+}
+.home .section .imgbanner .swiper .imgsBannerBox .scrollImgBox .scrollImgList2 .list .name.data-v-23e8ff1c:last-child {
+  margin-right: 0;
+}
+.home .section .tcbanner.data-v-23e8ff1c {
+  position: relative;
+  width: 750rpx;
+}
+.home .section .tcbanner image.data-v-23e8ff1c {
+  width: 100%;
+  vertical-align: middle;
+  background-color: #fff;
+}
+.home .section .tcbanner .tcbanner_b.data-v-23e8ff1c {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 190rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.home .section .tcbanner .tcbanner_b .fenge.data-v-23e8ff1c {
+  width: 1px;
+  height: 45rpx;
+  background-color: #fff;
+  opacity: 0.6;
+}
+.home .section .tcbanner .tcbanner_b .tcbanner_b_i.data-v-23e8ff1c {
+  width: 33%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  color: #ffffff;
+}
+.home .section .tcbanner .tcbanner_b .tcbanner_b_i text.data-v-23e8ff1c:first-child {
+  font-size: 26rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+}
+.home .section .tcbanner .tcbanner_b .tcbanner_b_i text.data-v-23e8ff1c:last-child {
+  font-size: 22rpx;
+  opacity: 0.6;
+}
+.home .section .shop.data-v-23e8ff1c {
+  width: 710rpx;
+  padding: 20rpx;
+  background-color: #f3f3f3;
+}
+.home .section .shop .shop_i.data-v-23e8ff1c:last-child {
+  margin-bottom: 0rpx;
+}
+.home .section .shop .shop_i.data-v-23e8ff1c {
+  position: relative;
+  width: 650rpx;
+  padding: 30rpx;
+  background-color: #ffffff;
+  -webkit-border-radius: 26rpx;
+          border-radius: 26rpx;
+  margin-bottom: 20rpx;
+}
+.home .section .shop .shop_i image.data-v-23e8ff1c:first-child {
+  width: 100%;
+  height: 290rpx;
+  -webkit-border-radius: 15rpx;
+          border-radius: 15rpx;
+}
+.home .section .shop .shop_i .youxuan.data-v-23e8ff1c {
+  width: 102rpx;
+  height: 93rpx;
+  position: absolute;
+  top: 30rpx;
+  right: 60rpx;
+}
+.home .section .shop .shop_i .shop_i_t.data-v-23e8ff1c {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin: 20rpx 0;
+}
+.home .section .shop .shop_i .shop_i_m.data-v-23e8ff1c {
+  font-size: 26rpx;
+  color: #999999;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.home .section .shop .shop_i .shop_i_b.data-v-23e8ff1c {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+          align-items: flex-end;
+}
+.home .section .shop .shop_i .shop_i_b text.data-v-23e8ff1c:first-child {
+  font-size: 25rpx;
+  color: #333333;
+}
+.home .section .shop .shop_i .shop_i_b text.data-v-23e8ff1c:last-child {
+  padding: 10rpx 30rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  font-size: 30rpx;
+  color: #ffffff;
+  background-color: #ff2b10;
+  -webkit-border-radius: 30rpx;
+          border-radius: 30rpx;
+}
+

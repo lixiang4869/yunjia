@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "团长招募",
+  "usingComponents": {
+    "mpvue-city-picker": "/components/mpvue-citypicker/mpvueCityPicker"
+  }
+}

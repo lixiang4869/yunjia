@@ -1,0 +1,332 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+.main.data-v-59a8926b {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  background: #F3F3F3;
+}
+.main .head.data-v-59a8926b {
+  background: url("https://xin.yiyunoto.com/uploads/static/open/menjin/bg.png") no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  z-index: 500;
+  width: 100%;
+  height: 560rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  padding-top: 40rpx;
+}
+.main .head .back.data-v-59a8926b {
+  position: absolute;
+  z-index: 999;
+  margin: 60rpx auto 20rpx 30rpx;
+}
+.main .head .back image.data-v-59a8926b {
+  width: 19rpx;
+  height: 34rpx;
+}
+.main .head .navbarTitle.data-v-59a8926b {
+  margin-top: 60rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 100%;
+}
+.main .head .navbarTitle .title.data-v-59a8926b {
+  width: 148rpx;
+  height: 36rpx;
+  font-size: 36rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: white;
+}
+.main .head .menjin.data-v-59a8926b {
+  margin-top: 60rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.main .head .menjin .pre.data-v-59a8926b, .main .head .menjin .next.data-v-59a8926b {
+  width: 19rpx;
+  height: 34rpx;
+}
+.main .head .menjin .men.data-v-59a8926b {
+  margin-left: 80rpx;
+  margin-right: 30rpx;
+  width: 179rpx;
+  height: 209rpx;
+}
+.main .head .addr.data-v-59a8926b {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 36%;
+  margin: 30rpx 32% auto;
+  height: 60rpx;
+  background: rgba(255, 255, 255, 0.25);
+  -webkit-border-radius: 30rpx;
+          border-radius: 30rpx;
+  font-size: 28rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: white;
+}
+.main .head .btn.data-v-59a8926b {
+  position: absolute;
+  z-index: 999;
+  top: 540rpx;
+  margin: auto 17% auto;
+  width: 66%;
+  height: 110rpx;
+  background: white;
+  -webkit-box-shadow: 0rpx 9rpx 10rpx 0rpx rgba(120, 142, 200, 0.2);
+          box-shadow: 0rpx 9rpx 10rpx 0rpx rgba(120, 142, 200, 0.2);
+  -webkit-border-radius: 55rpx;
+          border-radius: 55rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.main .head .btn .leftImg.data-v-59a8926b {
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.main .head .btn .leftImg image.data-v-59a8926b {
+  width: 91rpx;
+  height: 91rpx;
+}
+.main .head .btn .open.data-v-59a8926b {
+  width: 145rpx;
+  font-size: 36rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: white;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(100, 159, 251, 0.68)), to(#2c6df5));
+  background: -webkit-linear-gradient(right, rgba(100, 159, 251, 0.68) 0%, #2c6df5 100%);
+  background: linear-gradient(-90deg, rgba(100, 159, 251, 0.68) 0%, #2c6df5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.main .head .btn .rightImg.data-v-59a8926b {
+  margin-right: 60rpx;
+}
+.main .head .btn .rightImg image.data-v-59a8926b {
+  width: 32rpx;
+  height: 40rpx;
+}
+.main .index_nav.data-v-59a8926b {
+  position: absolute;
+  top: 600rpx;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  background: #FFFFFF;
+}
+.main .index_nav .category.data-v-59a8926b {
+  padding-top: 80rpx;
+  width: 33%;
+  height: 160rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.main .index_nav .category .img.data-v-59a8926b {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.main .index_nav .category .img image.data-v-59a8926b {
+  width: 86rpx;
+  height: 86rpx;
+}
+.main .index_nav .category .text.data-v-59a8926b {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  height: 27rpx;
+  font-size: 26rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: #333333;
+  line-height: 40rpx;
+}
+.main .section.data-v-59a8926b {
+  width: 100%;
+  height: calc(100vh -400px);
+  overflow-y: auto;
+  top: 880rpx;
+  position: absolute;
+  z-index: 999;
+}
+.main .section .records.data-v-59a8926b {
+  width: 100%;
+  background: #FFFFFF;
+  padding-top: 20rpx;
+  padding-bottom: 30rpx;
+}
+.main .section .records .open.data-v-59a8926b {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+}
+.main .section .records .open .shu.data-v-59a8926b {
+  margin-right: 20rpx;
+  width: 4rpx;
+  height: 25rpx;
+  background: #3f7ef7;
+}
+.main .section .records .open .today.data-v-59a8926b {
+  width: 184rpx;
+  font-size: 30rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: #333333;
+}
+.main .section .records .details.data-v-59a8926b {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+}
+.main .section .records .details image.data-v-59a8926b {
+  width: 86rpx;
+  height: 86rpx;
+  margin-right: 20rpx;
+}
+.main .section .records .details .renyuan.data-v-59a8926b {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.main .section .records .details .renyuan .name.data-v-59a8926b {
+  margin-top: 6rpx;
+  width: 200rpx;
+  height: 30rpx;
+  font-size: 30rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: #333333;
+}
+.main .section .records .details .renyuan .time.data-v-59a8926b {
+  margin-top: 20rpx;
+  width: 488rpx;
+  height: 26rpx;
+  font-size: 26rpx;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  color: #999999;
+}
+.main .section .records .details .renyuan .xian.data-v-59a8926b {
+  margin-top: 20rpx;
+  width: 579rpx;
+  height: 1rpx;
+  background: #f4f4f4;
+}
+

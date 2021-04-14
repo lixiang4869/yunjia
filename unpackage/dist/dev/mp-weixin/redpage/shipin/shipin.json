@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-upload": "/components/tui-upload/tui-upload"
+  }
+}

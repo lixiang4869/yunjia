@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "faxian": "/pages/newfind/redpage",
+    "wxsp": "/pages/newfind/index",
+    "my-center": "/pages/newfind/mePage",
+    "live": "/pages/newfind/video",
+    "attention": "/pages/newfind/attention",
+    "uni-transition": "/components/uni-transition/uni-transition"
+  }
+}

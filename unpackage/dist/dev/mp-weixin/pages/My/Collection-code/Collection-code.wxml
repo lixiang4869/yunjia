@@ -1,0 +1,1 @@
+<view><view class="top"><view class="top-one"><view class="title">扫二维码向我付钱</view><view><image class="images" src="{{url+src}}"></image></view><view data-event-opts="{{[['tap',[['saveImg',['$event']]]]]}}" class="set" bindtap="__e">保存图片</view></view></view></view>

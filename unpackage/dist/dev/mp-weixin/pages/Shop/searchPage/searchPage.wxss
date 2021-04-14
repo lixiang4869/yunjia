@@ -1,0 +1,159 @@
+.place {
+  width: 92%;
+  padding: 0 4%;
+  height: 80rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  z-index: 10;
+  background-color: #fff;
+}
+.place .input-box {
+  width: 75%;
+  height: 60rpx;
+  background-color: #f3f3f3;
+  -webkit-border-radius: 30rpx;
+          border-radius: 30rpx;
+  line-height: 60rpx;
+  margin-right: 40rpx;
+}
+.place .input-box input {
+  padding-top: 10rpx;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding-left: 28rpx;
+  font-size: 28rpx;
+}
+/* 商品列表 */
+.shops {
+  margin: 0 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.shops .shop {
+  width: 46%;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin: 10rpx 0;
+  background: #ffffff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
+}
+.shops .shop .img_goods {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+}
+.shops .shop .buy-name {
+  width: 100%;
+  color: #333333;
+  text-align: left;
+  font-size: 32rpx;
+  margin: 10rpx 0;
+  font-weight: 700;
+  overflow: hidden;
+  word-break: break-all;
+  /* break-all(允许在单词内换行。) */
+  text-overflow: ellipsis;
+  /* 超出部分省略号 */
+  display: -webkit-box;
+  /** 对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical;
+  /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 1;
+  /** 显示的行数 **/
+}
+.shops .shop .shop-price2 {
+  margin-bottom: 15rpx;
+  width: 100%;
+  margin-top: 30rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  line-height: 30rpx;
+}
+.shops .shop .shop-price2 .text {
+  font-size: 24rpx;
+  color: #666666;
+}
+.shops .shop .shop-price2 .text2 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 24rpx;
+  color: #666666;
+}
+.shops .shop .shop-price2 .num {
+  color: #FE1722;
+  font-size: 34rpx;
+}
+.shops .shop .shop-price2 .tj {
+  text-decoration: line-through;
+  color: #999999;
+  margin-left: 5rpx;
+  font-size: 28rpx;
+  text-align: left;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.shops .shop > view:nth-child(2) {
+  font-size: 22rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #262b3f;
+}
+.shops .shop > view:nth-child(3) {
+  font-size: 18rpx;
+  font-family: Source Han Sans CN;
+}
+.shops .shop > view:nth-child(3) > text:nth-child(1) {
+  color: #B2B3B8;
+}
+

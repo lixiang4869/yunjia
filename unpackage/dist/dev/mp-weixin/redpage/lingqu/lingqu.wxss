@@ -1,0 +1,183 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+.content.data-v-61f65de2 {
+  background-color: #FB263A;
+}
+.content .congxin.data-v-61f65de2 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  padding-top: 150rpx;
+}
+.content .congxin .congxina.data-v-61f65de2 {
+  position: absolute;
+  margin-top: -75rpx;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+}
+.content .congxin .congxinb.data-v-61f65de2 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.content .congxin .congxinb .congxinb-a.data-v-61f65de2 {
+  position: absolute;
+  margin-top: 90rpx;
+}
+.content .congxin .congxinb .congxinb-a .name.data-v-61f65de2 {
+  font-size: 40rpx;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: #333333;
+}
+.content .congxin .congxinb .congxinb-a .xianzhi.data-v-61f65de2 {
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  width: 200rpx;
+  height: 50rpx;
+  border: 2rpx solid #FB263A;
+  -webkit-border-radius: 40rpx;
+          border-radius: 40rpx;
+  font-size: 26rpx;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: #fb263a;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.content .congxin .congxinb .congxinb-a .jine.data-v-61f65de2 {
+  padding-top: 50rpx;
+  margin-left: 20rpx;
+  height: 52rpx;
+  font-size: 60rpx;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #fb263a;
+  line-height: 19rpx;
+}
+.content .congxin .congxinb .congxinb-a .islingqu.data-v-61f65de2 {
+  padding-top: 20rpx;
+  margin-left: 40rpx;
+  height: 23rpx;
+  font-size: 24rpx;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #999999;
+  line-height: 19rpx;
+}
+.content .zj.data-v-61f65de2 {
+  background-color: #FB263A;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.content .zj .zja.data-v-61f65de2 {
+  width: 90%;
+  margin-top: 80rpx;
+  background: #fb4d56;
+  border: 0px solid black;
+  -webkit-border-radius: 12rpx;
+          border-radius: 12rpx;
+}
+.content .zj .zja .zja-a.data-v-61f65de2 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.content .zj .zja .zja-a text.data-v-61f65de2 {
+  margin-top: 50rpx;
+  font-size: 40rpx;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: white;
+  line-height: 19rpx;
+}
+.content .zj .zja .zja-b.data-v-61f65de2 {
+  padding: 30rpx 30rpx;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: white;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+.content .zj .zja .zja-b .userrow.data-v-61f65de2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.content .zj .zja .zja-b .userrow .leftrow.data-v-61f65de2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.content .zj .zja .zja-b .userrow .leftrow .name_shijian.data-v-61f65de2 {
+  font-size: 35rpx;
+}
+.content .zj .zja .zja-b .userrow .leftrow .shijian.data-v-61f65de2 {
+  padding-top: 30rpx;
+  font-size: 30rpx;
+  opacity: 0.73;
+}
+.content .zj .zja .zja-b .userrow .right.data-v-61f65de2 {
+  font-size: 30rpx;
+  margin-top: 40rpx;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #fbee60;
+  line-height: 19rpx;
+}
+

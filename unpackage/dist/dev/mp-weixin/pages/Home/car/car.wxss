@@ -1,0 +1,559 @@
+page {
+  background-color: #f5f5f5;
+}
+.numsBox {
+  margin-right: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.operation {
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  text-align: center;
+  line-height: 40rpx;
+  background-color: #FFFFFF;
+  color: #E1E1E1;
+  border: 1rpx solid #EBEBEB;
+}
+.operation:first-child {
+  -webkit-border-top-left-radius: 20rpx;
+          border-top-left-radius: 20rpx;
+  -webkit-border-bottom-left-radius: 20rpx;
+          border-bottom-left-radius: 20rpx;
+}
+.operation:last-child {
+  color: #FF502E;
+  -webkit-border-top-right-radius: 20rpx;
+          border-top-right-radius: 20rpx;
+  -webkit-border-bottom-right-radius: 20rpx;
+          border-bottom-right-radius: 20rpx;
+}
+.sumNum {
+  width: 80rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #333333;
+  border-top: 1rpx solid #EBEBEB;
+  border-bottom: 1rpx solid #EBEBEB;
+}
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.topBox {
+  width: 100%;
+  height: 18%;
+  position: relative;
+}
+/* 去掉刘海 */
+.status_bar {
+  height: 25px;
+  width: 100%;
+  padding-top: 60rpx;
+}
+.topBg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.top {
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  left: 0;
+  top: 25px;
+  z-index: 2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 0 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.navBox {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 0 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.title {
+  font-size: 36rpx;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.edit {
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+.menuNav {
+  width: 96%;
+  height: 7%;
+  margin: 0 auto;
+  -webkit-border-bottom-left-radius: 10rpx;
+          border-bottom-left-radius: 10rpx;
+  -webkit-border-bottom-right-radius: 10rpx;
+          border-bottom-right-radius: 10rpx;
+  background-color: #FFFFFF;
+}
+.nav {
+  white-space: nowrap;
+  width: 85%;
+}
+.bg-white {
+  font-size: 25rpx;
+  color: #FFFFFF;
+}
+.cu-item {
+  height: 90rpx;
+  display: inline-block;
+  line-height: 90rpx;
+  margin: 0 10rpx;
+  padding: 0 20rpx;
+}
+.text-green {
+  color: #FFFFFF;
+  font-size: 35rpx;
+}
+.navItem {
+  height: 100%;
+  margin: 0 20rpx;
+  padding: 10rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.activeLine {
+  width: 30rpx;
+  border: 1rpx solid #FFFFFF;
+}
+.container {
+  width: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  padding: 20rpx;
+  padding-bottom: 120rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-border-radius: #f3f3f3;
+          border-radius: #f3f3f3;
+}
+.containera {
+  width: 100%;
+  padding: 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.indentBox {
+  padding: 20rpx;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
+  background-color: #FFFFFF;
+  position: relative;
+}
+.indentBox:not(:first-child) {
+  margin-top: 20rpx;
+}
+.leftCheckBox {
+  padding-left: 20rpx;
+  padding-right: 16rpx;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.indentTitle {
+  width: 100%;
+  height: 18%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.checkImg {
+  width: 34rpx;
+  height: 34rpx;
+}
+.logoImg {
+  width: 100rpx;
+  height: 40rpx;
+}
+.indentShopName {
+  font-size: 30rpx;
+  color: #333;
+  margin-left: 5rpx;
+  margin-right: 20rpx;
+}
+.detaileIcon {
+  width: 30rpx;
+  height: 30rpx;
+}
+.commodityBox {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.shopInfoBox {
+  width: 86%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.shopImg {
+  width: 160rpx;
+  height: 160rpx;
+}
+.shopInfoRight {
+  width: 70%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.shopIntroduce {
+  width: 100%;
+  color: #333;
+  font-weight: bold;
+  font-size: 30rpx;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.tag {
+  display: inline-block;
+  width: 92rpx;
+  height: 50rpx;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 50rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
+  color: #FFFFFF;
+  background-color: #FB553E;
+  margin-bottom: 30rpx;
+}
+.shopInfoPosition {
+  width: 100%;
+  height: 120rpx;
+  margin-bottom: 20rpx;
+}
+.shopModelBox {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.rightShopInfo {
+  width: 86%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.shopModelTxt {
+  width: 100%;
+  height: 50rpx;
+  display: inline-block;
+  font-size: 26rpx;
+  line-height: 50rpx;
+  color: #999999;
+  background-color: #f9f9f8;
+}
+.priceNum {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-top: 20rpx;
+}
+.price {
+  font-size: 36rpx;
+  color: #FF3B30;
+}
+.totalBox {
+  width: 100%;
+  height: 100rpx;
+  padding-left: 24rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  background-color: #FFFFFF;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+.allCheckBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.allCheckImg {
+  width: 40rpx;
+  height: 40rpx;
+}
+.sumBtn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.btn {
+  font-size: 36rpx;
+  color: #FFFFFF;
+  background-color: #FB4832;
+  text-align: center;
+  line-height: 80rpx;
+  margin-right: 24rpx;
+  -webkit-border-radius: 40rpx;
+          border-radius: 40rpx;
+  width: 240rpx;
+  height: 80rpx;
+  background: -webkit-gradient(linear, left top, right top, from(#FF7085), to(#FF5837));
+  background: -webkit-linear-gradient(left, #FF7085 0%, #FF5837 100%);
+  background: linear-gradient(90deg, #FF7085 0%, #FF5837 100%);
+  margin-left: 24rpx;
+}
+.shopItemBox {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 200rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-border-radius: 16rpx;
+          border-radius: 16rpx;
+  background-color: #FFFFFF;
+}
+.shopItemBox .leftImg {
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 24rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
+}
+.shopItemBox .shopItemInfoBox {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.upshop {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  right: 30rpx;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+.youLike {
+  width: 100%;
+  height: 10%;
+  margin: 30rpx 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.youLikeImg {
+  height: 60rpx;
+  width: 422rpx;
+}
+

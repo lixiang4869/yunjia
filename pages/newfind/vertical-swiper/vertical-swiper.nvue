@@ -1,0 +1,399 @@
+<template>
+<view class="container">
+	<list @loadmore="getData()" :loadmoreoffset="wHeight*3" :show-scrollbar="false" ref="listBox" :pagingEnabled="true" :scrollable="true">
+		<cell v-for="(item,i) in dataList" :key="i">
+			<div ref="item" class="item"  :style="boxStyle">
+				<jVideo
+					v-if="Math.abs(k-i)<=1"
+					:state="item.state"
+					:src="url+item.src"
+					:boxStyle="boxStyle"
+				></jVideo>
+				<view class="videoHover" v-if="1" @click="tapVideoHover(item.state,$event)" :style="boxStyle">
+				  	<image v-if="item.state=='pause'" class="playState" src="https://xin.yiyunoto.com/uploads/static/img/index/play.png"></image>
+				</view>
+				<view class="userInfo" @appear="k=i">
+				 	<image class="userAvatar" :src="url+item.headImg"></image>
+					<text class="attenTxt" @click.stop="attentionUp(item.uid,i)" v-if="item.guanzhu==1">+</text>
+				 	<view class="like" @click="cLike(item.uid,item.like);item.like=!item.like">
+				 		<image v-if="item.like" class="likeIco" src="https://xin.yiyunoto.com/uploads/static/img/index/xinActive.png"/>
+				 		<image v-else class="likeIco" src="https://xin.yiyunoto.com/uploads/static/img/index/xin.png"/>
+				 		<text class="likeNum" :class="{'likeNumActive':item.like}">{{item.like_n/10000>=1?parseInt(item.like_n/10000)+'w+':item.like_n}}</text>
+				 	</view>
+				 	<view class="comment" @click.stop="toComment(i)">
+				 		<image class="commentIco" src="https://xin.yiyunoto.com/uploads/static/img/index/comment.png"></image>
+						<text class="commentNum" style="color: #FFFFFF;">{{Math.abs(item.comm_num/10000>=1?parseInt(item.comm_num/10000)+'w+':item.comm_num)}}</text>
+				 	</view>
+				 	<view class="share" @click="share('1',i)">
+				 		<image class="shareIco" src="https://xin.yiyunoto.com/uploads/static/img/index/share.png"></image>
+				 		<text class="shareTex">分享</text>
+				 	</view>
+				</view>
+				<view class="content">
+				 	<text class="userName">@{{item.title}}</text>
+				 	<text class="words">{{item.msg}}</text>
+				</view>
+			</div>
+		</cell>
+	</list>
+	<my-comment v-if="commentShow" @commentClose="commentClose" 
+	  :oid="oid" :authtoken="authtoken" :url="url" @comm_numPlus="comm_numPlus"></my-comment>
+	<uni-transition :modeClass="['fade','slide-bottom']" :show="shareShow">
+		<my-share @tapShare="tapShare" @select="select" :title='"分享到"'></my-share>
+	</uni-transition>
+</view>
+</template>
+<script>
+const dom = weex.requireModule('dom');
+const BindingX = uni.requireNativePlugin('bindingx');
+import jVideo from './j-video.nvue';
+import myComment from '@/components/myComment/myComment.vue'
+import uniTransition from '@/components/uni-transition/uni-transition.vue'
+import myShare from '@/components/myShare/myShare.nvue'
+// var boxStyle={
+// 	'height':0,
+// 	'width':'750upx'
+// }
+export default {
+		components: {
+			jVideo,
+			myShare,
+			myComment,
+			uniTransition},
+   //      data: {
+			// dataList:[],
+			// scrollTop:0,
+			// oldScrollTop:0,
+			// boxStyle:{
+			// 	'height':0,
+			// 	'width':'750upx'
+			// },
+			// wHeight:0,
+			// k:0,
+			// playIngIds:[],//正在播放的视频id列队，列队用于处理滑动过快导致的跳频问题
+			// ready:false,
+			// //isDragging:false//用户是否正在拖动列表
+   //      },
+		
+		props:{
+			isVideoStop:{
+				type:Boolean,
+				default:true
+			}
+		},
+		data(){
+			return {
+				dataList:[],
+				scrollTop:0,
+				oldScrollTop:0,
+				boxStyle:{
+					'height':'',
+					'width':'750upx'
+				},
+				wHeight:0,
+				k:0,
+				playIngIds:[],//正在播放的视频id列队，列队用于处理滑动过快导致的跳频问题
+				ready:false,
+				url:this.$store.state.url,
+				authtoken:uni.getStorageSync('authtoken'),
+				shareShow:false,
+				idx:0,
+				commentShow:false,
+				oid:0,
+				page:1,
+				total:1
+				//isDragging:false//用户是否正在拖动列表
+			}
+		},
+		watch:{
+			k(k,old_k){
+				this.dataList[k].state = 'play'
+				this.dataList[old_k].state = 'stop'
+			},
+			isVideoStop(newVal,oldVal){
+				console.log(newVal)
+				if(newVal){
+					this.dataList[this.k].state = 'pause'
+				}else{
+					this.dataList[this.k].state = 'continue'
+				}
+			}
+		},
+		onShow(){
+			console.log('回到前台');
+		},
+		onHide(){
+			console.log('到后台');
+			// this.$refs.video[this.k].pause();
+		},
+		mounted(){
+			this.wHeight = uni.getSystemInfoSync().windowHeight-120;
+			// this.boxStyle.height = this.wHeight;
+			this.getData(e=>{
+				// this.$refs.video[0].play();
+				this.dataList[0].state = 'play';
+				this.ready = true;
+			});
+		},
+		onReady() {
+		},
+        methods: {
+			//点击播放&&暂停
+			tapVideoHover(state,event){
+				console.log('state--',state);
+				if(state=='play'||state=='continue'){
+					this.dataList[this.k].state = 'pause';
+				}else{
+					this.dataList[this.k].state = 'continue';
+				}
+			},
+			toComment(i){
+				this.idx = i;
+				this.oid = this.dataList[i].id;
+				console.log(this.dataList[i]);
+				this.commentShow = true;
+			},
+			share(bool,idx){
+				this.idx = idx;
+				if(bool == false){
+					this.shareShow = bool;
+				}else{
+					this.shareShow = !this.shareShow;
+				}
+			},
+			cLike(video_id,sss){
+				//console.log(video_id)
+				const video = this.dataList[this.k];
+				sss?video.like_n -= 1:video.like_n += 1;
+				var _this = this;
+				uni.request({
+					url:this.url+'/api/video/store_l',
+					method:"POST",
+					header:{
+						authtoken:uni.getStorageSync('authtoken')
+					},
+					data:{
+						tid:1,
+						oid:video_id
+					},
+					success(res) {
+						const video = _this.dataList[_this.k];
+						sss?video.like_n -= 1:video.like_n += 1;
+					}
+				})
+			},
+			// 关注
+			attentionUp(uid,index){
+				var _this = this;
+				console.log(index);
+				uni.request({
+					url:this.url+'/api/video/store_l',
+					method:"POST",
+					header:{
+						authtoken:uni.getStorageSync('authtoken')
+					},
+					data:{
+						tid:2,
+						oid:uid
+					},
+					success(res) {
+						_this.dataList[index].guanzhu = !_this.dataList[index].guanzhu
+						console.log(res);
+					}
+				})
+			},
+			loadmore(){
+				if(this.page<this.total){
+					this.page++;
+					this.getData();
+				}
+				
+			},
+			getData(callback=e=>{}){
+				var _this = this;
+				uni.request({
+					url: this.$store.state.url+ '/api/Video/collect1',
+					header:{
+						authtoken:this.authtoken
+					},
+					data:{
+						page:this.page
+					},
+					success(res) {
+						_this.total=res.data.data.totalpage
+						var data = res.data.data.data;
+						for (let i = 0; i < data.length; i++) {
+							_this.dataList.push({
+								title:data[i].username,
+								msg:data[i].title,
+								state : 'pause',
+								like :  data[i].like,
+								like_n : data[i].num,
+								src : data[i].vurl,
+								headImg:data[i].head,
+								guanzhu:data[i].guanzhu,
+								comm_num:data[i].comm_num,
+								id:data[i].id,
+								uid:data[i].uid,
+								videoImg : ''
+							});
+						}
+					}
+				})
+				
+				setTimeout(e=>{//模拟接口请求时间为1秒
+					callback()
+				},1000);
+			},
+			// 分享
+			select(name){
+				var obj = this.dataList[this.idx];
+				console.log(this.idx)
+				console.log(obj)
+				uni.share({
+				    provider: "weixin",
+				    scene:name,
+				    type: 4,
+					mediaUrl:this.url+obj.src,
+				    title: obj.msg,
+				    success: function (res) {
+						console.log(res);
+						uni.showToast({
+							icon:'none',
+							title:'转发成功'
+						})
+				        console.log("success:" + JSON.stringify(res));
+				    },
+				    fail: function (err) {
+						uni.showToast({
+							icon:'none',
+							title:'转发失败'
+						})
+				        console.log("fail:" + JSON.stringify(err));
+				    }
+				});
+			},
+			// 弹出分享页面
+			tapShare(bool,idx) {
+				this.idx = idx;
+				if(bool == false){
+					this.shareShow = bool;
+				}else{
+					this.shareShow = !this.shareShow;
+				}
+			},
+			commentClose(bool){
+				this.commentShow = bool;
+				var _this = this;
+				uni.request({
+					url:this.url+'/api/video/list_message',
+					method:'POST',
+					data:{
+						oid:this.oid
+					},
+					success(res) {
+						var obj = res.data.data;
+						_this.dataList[_this.idx].comm_num = obj.total;
+						console.log(res);
+					}
+				})
+			},
+			comm_numPlus(i){
+				this.dataList[this.idx].comment = this.dataList[this.idx].comment * 1 + 1
+				this.dataList[this.idx].comment = this.dataList[this.idx].comment * 1 + 1;
+			}
+        }
+    }
+</script>
+<style>
+    .container {flex: 1;background-color: #eeeeee;}
+    .item {
+		width : 750upx;
+		background-color: #000000;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
+	.videoHover{
+		position: absolute;
+		top: 0;
+		left: 0;
+		flex: 1;
+		background-color: rgba(0,0,0,0.1);
+		justify-content: center;
+		align-items: center;
+		
+		/* border-style: dashed;
+		border-color: #DD524D;
+		border-width: 1px; */
+	}
+	.playState{
+		width:  80upx;
+		height: 80upx;
+	}
+	.userInfo{
+		position: absolute;
+		bottom:250upx;
+		right: 15px;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		
+	}
+	.userAvatar{
+		border-radius: 500%;
+		margin-bottom: 15px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #ffffff;
+	}
+	.userAvatar{
+		width : 90upx;
+		height: 90upx;
+	}
+	.likeIco,.shareIco,.commentIco{
+		width : 60upx;
+		height: 60upx;
+		margin-top: 15px;
+	}
+	.likeNum,.commentNum,.shareTex,.attenTxt{
+		color: #ffffff;
+		font-size: 30upx;
+		text-align: center;
+		margin: 5px;
+	}
+	.attenTxt{
+		/* #ifndef APP-PLUS */
+		display: inline-black;
+		/* #endif */
+		width: 40upx;
+		height: 40upx;
+		background-color: #ff0000;
+		border-radius: 10px;
+		line-height: 40upx;
+		margin: -25px 0 0 0;
+	}
+	.likeNumActive{
+		color: red;
+	}
+	.content{
+	  width: 720upx;
+	  z-index: 99;
+	  position: absolute;
+	  bottom: 10px;
+	  justify-content: center;
+	  padding: 15upx;
+	  flex-direction: column;
+	  justify-content: flex-start;
+	  color: #ffffff;
+	}
+	.userName {
+	  font-size: 30upx;
+	  color: #ffffff;
+	}
+	.words {
+	  margin-top: 10upx;
+	  font-size: 30upx;
+	  color: #ffffff;
+	}
+</style>

@@ -1,0 +1,427 @@
+<template>
+	<view :style="{width:width,height:height}">
+		<live-pusher id='livePusher' ref="livePusher" class="livePusher" :url="url"
+		        mode="SD" :enable-camera="true" :auto-focus="false" :beauty="1" whiteness="2"
+		        aspect="9:16" @statechange="statechange" @netstatus="netstatus" @error = "error"
+				:style="{width:width,height:height}"
+				:muted="false" :enable-mic="true" audio-quality="high" :enable-ans="true" audio-volume-type="voicecall"
+		        ></live-pusher>
+		<cover-view :style="{width:width,height:height}" class="box">
+			<view class="status_bar">
+				<!-- 这里是状态栏 -->
+			</view>
+			<!-- 停止并关闭页面按钮 -->
+			<view class="closePage" @click="closePage">
+				<image class="closeImg" src="../../static/video/close.png"></image>
+			</view>
+			<!-- 暂停和开始按钮 -->
+			<!-- <view class="stopOrStart" @click="stopOrStart">
+				<view class="stopLive" v-if="isStart == 1"></view>
+				<view class="startLive" v-if="isStart == 0"></view>
+			</view> -->
+			<!-- 切换前置或后置摄像头 -->
+			<view class="cutCamera" @click="switchCamera">
+				<image class="cutCameraImg" src="../../static/video/cut.png"></image>
+			</view>
+			
+			<view class="attentionYou" v-if="keepShow">
+				<image src="../../static/video/attention.png" style="width: 345upx;height: 50upx;"></image>
+				<image class="xin" src="../../static/video/redatten.png"></image>
+				<text class="attentionMsg">{{keepName}} : 关注了你</text>
+			</view>
+			<scroll-view class="msgBox" :scroll-y="true">
+				<text class="msg" v-for="(item,index) in sayMsg" :key="index">{{item.nickname}}{{item.content}}</text>
+			</scroll-view>
+			<!-- <input class="inp" type="text" placeholder="聊些什么吧" placeholder-style="color: #fff;" :hold-keyboard="false" confirm-type="发送" :adjust-position="false" v-model="bulidInfo" @confirm="clickRequest"/> -->
+			<text class="onlineNum">{{totalNum}}人观看</text>
+		</cover-view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data(){
+			return{
+				width:'',
+				height:'',
+				url:'',
+				tuiurl:'',
+				fil: true,
+				isStart:0,
+				socketTask:'',// socket
+				nickname:'',// 昵称
+				roomId:'',// 房间号
+				sayMsg:[],//弹幕消息
+				keepName:'',
+				keepShow:false,
+				totalNum:0,
+				bulidInfo:'',
+				is_open_socket:false
+			}
+		},
+		onLoad(options) {
+			this.tuiurl = this.$store.state.url;
+			console.log(options)
+			this.getVideoXY();
+			this.getTuiURL(options.streaname,options.authtoken);
+			if(parseInt(options.start) == '1'){
+				this.isStart = 1;
+			}
+		},
+		onReady() {
+			this.context = uni.createLivePusherContext("livePusher", this);
+		},
+		onShow() {
+			uni.setKeepScreenOn({
+			    keepScreenOn: true
+			});
+			setTimeout(()=>{
+				this.start();
+			},100)
+		},
+		onHide() {
+			// this.closeSocket();
+		},
+		// 关闭websocket【必须在实例销毁之前关闭,否则会是underfined错误】
+		beforeDestroy() {
+			this.closeSocket();
+		},
+		methods:{
+			// 获取视口宽高
+			getVideoXY(){
+				let res = uni.getSystemInfoSync()
+				console.log(res.windowWidth,res.windowHeight)
+				this.width = res.windowWidth+'px';
+				this.height = res.windowHeight+'px';
+			},
+			holdShow(){
+				uni.setKeepScreenOn({
+					keepScreenOn:true
+				})
+			},
+			// 获取推流URL
+			getTuiURL(streaname,authtoken){
+				var that = this;
+				uni.request({
+					url:this.tuiurl+'/api/liveApi/getPushurl',
+					method:"POST",
+					header:{
+						authtoken:authtoken
+					},
+					data:{
+						hnum:streaname,
+					}, 
+					success(res) {
+						console.log("成功",res);
+						var arr=res.data.data;
+						console.log(arr);
+						console.log(arr.url)
+						that.url = arr.url;
+						that.nickname = arr.room.nickname;
+						that.roomId = arr.room.id;
+						
+						that.createScoket();
+					}
+					
+				})
+			},
+			
+			statechange(e) {
+				console.log("statechange:" + JSON.stringify(e));
+			},
+			netstatus(e) {
+				// console.log("netstatus:" + JSON.stringify(e));
+			},
+			error(e) {
+				console.log("error:" + JSON.stringify(e));
+			},
+			start: function() {
+				this.context.start({
+					success: (a) => {
+						// console.log("livePusher.start:" + JSON.stringify(a));
+					}
+				});
+			},
+			stop: function() {
+				this.context.stop({
+					success: (a) => {
+						console.log("livePusher.pause:" + JSON.stringify(a));
+					}
+				});
+			},
+			pause: function() {
+				this.context.pause({
+					success: (a) => {
+						console.log("livePusher.pause:" + JSON.stringify(a));
+					}
+				});
+			},
+			// 暂停或开始
+			stopOrStart(){
+				this.isStart = this.isStart==1 ? 0 : 1;
+				if(this.isStart == 1){
+					this.start();
+				}else{
+					this.pause();
+				}
+			},
+			// 关闭页面和停止直播
+			closePage(){
+				var that = this;
+				uni.sendSocketMessage({
+					data: '{"type":"stop","roomid":'+that.roomId+'}',
+					success() {
+						that.bulidInfo = '';
+						console.log("关闭消息发送成功");
+					}
+				});
+				this.isStart = 0;
+				this.closeSocket();
+				this.stop();
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			// 切换摄像
+			switchCamera: function() {
+				this.context.switchCamera({
+					success: (a) => {
+						console.log("livePusher.switchCamera:" + JSON.stringify(a));
+					}
+				});
+			},
+			
+			createScoket(){
+				console.log('111111')
+				var that = this;
+				uni.connectSocket({
+					url:'wss://videos.yiyunoto.com/wss',
+					success() {
+						console.log('socket 连接成功')
+					}
+				})
+				uni.onSocketOpen(function(){
+					uni.sendSocketMessage({
+						data:'{"type":"login", "client_name":"'+that.nickname+'", "room_id":"'+that.roomId+'"}',
+						success() {
+							console.log('socket  login 发送成功')
+						}
+					})
+				})
+				uni.onSocketMessage(function(res){
+					var obj = JSON.parse(res.data);
+					console.log(JSON.parse(res.data))
+					if(that.sayMsg.length >= 100){
+						var num = that.sayMsg.length - 100;
+						if(num > 0){
+							that.sayMsg = that.sayMsg.splice(99,num);
+						}
+					}
+					if(obj.type === "say"){
+						that.sayMsg.unshift({nickname:obj.from_client_name+' : ',content:obj.content})
+					}else if(obj.type === "login"){
+						that.totalNum = obj.total;
+						that.sayMsg.unshift({nickname:obj.client_name,content:' : 进入了直播间'})
+					}else if(obj.type === "keep"){
+						that.keepName = obj.from_client_name;
+						that.keepShow = true;
+						setTimeout(()=>{
+							that.keepShow = false;
+						},2000)
+					}else if(obj.type == 'leave'){
+						that.totalNum = obj.total;
+					}
+				})
+			},
+			// 关闭websocket【离开这个页面的时候执行关闭】
+			closeSocket() {
+				var that = this;
+				uni.closeSocket({
+					success(res) {
+						that.is_open_socket = false;
+						console.log("关闭成功", res)
+					},
+					fail(err) {
+						console.log("关闭失败", err)
+					}
+				})
+			},
+			// 点击发送
+			clickRequest() {
+				var that = this;
+				if (that.is_open_socket) {
+					// websocket的服务器的原理是:发送一次消息,同时返回一组数据【否则服务器会进去死循环崩溃】
+					uni.sendSocketMessage({
+						data: '{"type":"say","to_client_id":"all","to_client_name":"all","content":"'+that.bulidInfo+'"}',
+						async success() {
+							that.bulidInfo = '';
+							console.log("消息发送成功");
+						},
+					});
+				}
+			},
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+/* 去掉刘海 */
+.status_bar {
+	/* #ifndef APP-PLUS */
+	height: var(--status-bar-height);
+	/* #endif */
+	width: 100%;
+	padding-top: 60upx;
+}
+.box{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,.5);
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: center;
+}
+// 暂停和开始按钮
+.stopOrStart{
+	width: 150upx;
+	height: 150upx;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 50upx;
+	background-color: rgba(50,50,50,0.5);
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+// 暂停状态
+.stopLive{
+	width: 100upx;
+	height: 100upx;
+	border-radius: 50%;
+	position: absolute;
+	background-color: rgba(255,0,0,0.7);
+}
+// 开始状态
+.startLive{
+	width: 100upx;
+	height: 100upx;
+	border-radius: 50%;
+	position: absolute;
+	background-color: rgba(0,0,0,0.7);
+}
+// 关闭页面
+.closePage{
+	width: 70upx;
+	height: 70upx;
+	position: absolute;
+	top: 130upx;
+	right: 30upx;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.closeImg{
+	width: 40upx;
+	height: 40upx;
+}
+.cutCamera{
+	width: 90upx;
+	height: 90upx;
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 50%;
+	position: absolute;
+	bottom: 70upx;
+	right: 50upx;
+	/* #ifndef APP-PLUS */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.cutCameraImg{
+	width: 60upx;
+	height: 60upx;
+}
+// 弹幕
+.msgBox{
+	width: 350upx;
+	height: 500upx;
+	position: absolute;
+	bottom: 280upx;
+	left: 20upx;
+	border-radius: 10upx;
+}
+.msg{
+	width: 345upx;
+	/* #ifndef APP-PLUS */
+	display: block;
+	box-sizing:border-box;
+	/* #endif */
+	font-size: 28upx;
+	color: #fff;
+	padding: 10upx;
+	margin-top: 20upx;
+	/* #ifndef APP-PLUS */
+	white-space: pre-wrap;
+	/* #endif */
+	background-color: rgba(48,106,174,0.5);
+}
+// 关注主播
+.attentionYou{
+	width: 345upx;
+	height: 50upx;
+	position: absolute;
+	left: 0;bottom: 780upx;
+	border-radius: 20upx;
+	margin-left: 20upx;
+}
+.attentionMsg{
+	height: 50upx;
+	color: #fff;
+	font-size: 30upx;
+	line-height: 50upx;
+	position: absolute;
+	left: 70upx;
+}
+.xin{
+	width: 40upx;
+	height: 34upx;
+	position: absolute;
+	left: 20upx;
+	top: 12upx;
+}
+// 输入框
+.inp{
+	width: 479upx;
+	height: 62upx;
+	color: #fff;
+	border-radius: 30upx;
+	position: absolute;
+	bottom: 210upx;
+	left: 20upx;
+	font-size: 30upx;
+	padding-left: 30upx;
+	/* #ifndef APP-PLUS */
+	box-sizing: border-box;
+	/* #endif */
+	background-color: rgba($color: #FFFFFF, $alpha: 0.2);
+}
+// 在线人数
+.onlineNum{
+	font-size: 26upx;
+	color: #fff;
+	position: absolute;
+	right: 30upx;
+	top: 190upx;
+}
+</style>

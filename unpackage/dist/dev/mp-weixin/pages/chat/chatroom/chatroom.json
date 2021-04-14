@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "admin",
+  "usingComponents": {
+    "chat": "/comps/chat/chat"
+  }
+}

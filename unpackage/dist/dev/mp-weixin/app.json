@@ -1,0 +1,199 @@
+{
+  "pages": [
+    "pages/Shop/index/index",
+    "pages/My/hezuo/myhezuoList",
+    "pages/My/xieyi/image",
+    "pages/My/Cash/CashResult",
+    "pages/Home/car/index",
+    "pages/Home/index/index",
+    "pages/My/index/index",
+    "pages/kaimen/home/home",
+    "pages/My/hezuo/tuijian",
+    "pages/My/Login-registration/login",
+    "pages/My/manage/manage",
+    "pages/My/manage/manageorder",
+    "pages/Shop/index/selectXiaoQu",
+    "pages/My/bindXQ/selectXiaoQu",
+    "pages/newfind/newfind",
+    "pages/Home/category/list",
+    "pages/My/Login-registration/Login-registration",
+    "pages/Home/car/car",
+    "pages/My/Consumption-situation/Consumption-situation",
+    "pages/Home/storDetails/storeDetails",
+    "pages/Shop/commodity/commodity",
+    "pages/Shop/searchPage/searchPage",
+    "pages/Home/merchant/merchant",
+    "pages/My/Login-registration/Forget-password",
+    "pages/My/xiaoxiliebiao/xiaoxiliebiao",
+    "pages/My/order/order",
+    "pages/My/storeOrder/storeOrder",
+    "pages/My/pay-popup/pay-popup",
+    "pages/My/affirmOrder/affirmOrder",
+    "pages/My/affirmOrder2/affirmOrder",
+    "pages/My/Shopping/Shopping",
+    "pages/My/Collection-code/Collection-code",
+    "pages/My/Charge/Pay_success",
+    "pages/Home/searchPage/searchPage",
+    "pages/My/Collection-code/Amount-received",
+    "pages/My/Cash/Cash",
+    "pages/My/Charge/Charge",
+    "pages/My/Balance/Balance",
+    "pages/My/register/register",
+    "pages/My/Landing-password/Retrieve-landing",
+    "pages/My/Landing-password/Landing-password",
+    "pages/My/Set-payment-password/Set-payment-password",
+    "pages/My/Password/Password",
+    "pages/My/Modify-phoneNumber/Modify-phoneNumbers",
+    "pages/My/Modify-nickname/Modify-nickname",
+    "pages/My/Personal-data/Personal-data",
+    "pages/My/set/set",
+    "pages/Address/Receiving",
+    "pages/Address/Added",
+    "pages/Shop/product/product",
+    "pages/Shop/shop_car/index",
+    "pages/Shop/classify/classify",
+    "pages/Address/Compile",
+    "pages/My/pay-popup/Pay_success",
+    "pages/Shop/index/recruitment",
+    "pages/newfind/video",
+    "pages/newfind/mePage",
+    "pages/newfind/identification",
+    "pages/newfind/attention",
+    "pages/newfind/laVideo",
+    "pages/newfind/liveSetout",
+    "pages/newfind/tuiVideo",
+    "pages/newfind/buildVideo",
+    "pages/My/hezuo/recruitment",
+    "pages/My/invitecode/invitecode",
+    "pages/My/feedback/feedback",
+    "pages/My/xieyi/xieyi",
+    "pages/My/xieyi/yinsi",
+    "pages/Shop/rushbuy/rushbuy",
+    "pages/My/manage/tzmanage",
+    "pages/My/manage/tztixianrecord",
+    "pages/My/manage/tzmanageorder",
+    "pages/My/manage/Cash",
+    "pages/My/collect/collect",
+    "pages/My/manage/refund",
+    "pages/Shop/commodity/newZone",
+    "pages/My/index/sao",
+    "pages/chat/chatroom/chatroom",
+    "pages/My/set/downloadCode/downloadCode",
+    "pages/My/manage/todayLog",
+    "pages/My/tuijian/tuijian",
+    "pages/My/manage/shopCenter",
+    "pages/My/manage/set/set",
+    "pages/My/manage/set/order",
+    "pages/My/manage/set/goods",
+    "pages/My/manage/set/addGoods",
+    "pages/My/manage/set/duiZhang",
+    "pages/Home/category/waimai",
+    "pages/Home/category/dian",
+    "pages/Home/category/list1",
+    "pages/Home/waimaiOrder/waimaiOrder",
+    "pages/kaimen/home/tijian",
+    "pages/Home/category/product",
+    "pages/My/hezuo/addUs",
+    "pages/My/hezuo/applyCity/applyCity",
+    "pages/My/hezuo/applyCity/applyArea",
+    "pages/My/hezuo/applyCity/applyCommunity",
+    "pages/My/hezuo/applyCity/applyBlackcard",
+    "pages/My/hezuo/applyCity/Pay_success",
+    "pages/My/hezuo/daili",
+    "pages/My/hezuo/setdaili",
+    "pages/My/hezuo/service",
+    "pages/My/Login-registration/select",
+    "pages/My/hezuo/manage",
+    "pages/My/hezuo/kaitong",
+    "pages/My/hezuo/guanxi",
+    "pages/My/hezuo/order"
+  ],
+  "subPackages": [
+    {
+      "root": "pagesA",
+      "pages": [
+        "Discern/index",
+        "Discern/uploadFace",
+        "Discern/inviteUser",
+        "update/index",
+        "kaimen/accessControl/accessControl",
+        "kaimen/smartParking/smartParking",
+        "kaimen/smartParking/parking/parking",
+        "samecity/xiche/xiche",
+        "samecity/detail/detail",
+        "sameOrder/sameOrder",
+        "sameOrder_detail/sameOrder_detail",
+        "YiBei/charging/charging",
+        "YiBei/charging/index",
+        "YiBei/charging/histroy"
+      ]
+    },
+    {
+      "root": "redpage",
+      "pages": [
+        "redpackge/detail/detail",
+        "shipin/shipin",
+        "umap/umap",
+        "baojilv/baojilv",
+        "detail/detail",
+        "lingqu/lingqu"
+      ]
+    },
+    {
+      "root": "mall",
+      "pages": [
+        "index/index"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "云家",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#FF502E",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/Shop/index/index",
+        "iconPath": "static/tabBar/go31.png",
+        "selectedIconPath": "static/tabBar/go3.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/Home/index/index",
+        "iconPath": "static/tabBar/findA.png",
+        "selectedIconPath": "static/tabBar/findM.png",
+        "text": "逛街"
+      },
+      {
+        "pagePath": "pages/kaimen/home/home",
+        "iconPath": "static/tabBar/open1.png",
+        "selectedIconPath": "static/tabBar/open.png",
+        "text": "开门"
+      },
+      {
+        "pagePath": "pages/newfind/newfind",
+        "iconPath": "static/tabBar/ygcA.png",
+        "selectedIconPath": "static/tabBar/ygcM.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/My/index/index",
+        "iconPath": "static/tabBar/myA.png",
+        "selectedIconPath": "static/tabBar/myM.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于推荐自提点"
+    }
+  },
+  "usingComponents": {}
+}

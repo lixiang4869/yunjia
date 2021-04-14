@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "chat-suit-main": "/comps/chat/inputbar/suit/main/main",
+    "chat-suit-image": "/comps/chat/inputbar/suit/image/image",
+    "chat-suit-emoji": "/comps/chat/inputbar/suit/emoji/emoji"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "sunui-mverify": "/components/sunui-mverify/sunui-mverify",
+    "status": "/components/status/status"
+  }
+}

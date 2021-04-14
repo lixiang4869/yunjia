@@ -1,0 +1,187 @@
+
+.content {
+	background: #ffffff;
+	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+}
+.title {
+	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.shopName {
+	margin-left: 20rpx;
+	font-size: 36rpx;
+	font-weight: 600;
+	color: #333;
+}
+.yulan {
+	margin-right: 20rpx;
+	background: #e7a733;
+	-webkit-border-radius: 32rpx;
+	        border-radius: 32rpx;
+	width: 187rpx;
+	height: 64rpx;
+	font-size: 26rpx;
+	color: #333;
+	line-height: 64rpx;
+	text-align: center;
+}
+.state {
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
+	height: 85rpx;
+	background: #e8e9f2;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	margin: 20rpx;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.dian {
+	margin: 20rpx;
+	width: 15rpx;
+	height: 15rpx;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
+	background: #0f835f;
+}
+.img {
+	margin: 20rpx;
+	width: 12rpx;
+	height: 22rpx;
+}
+.statu {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	font-size: 30rpx;
+	color: #333;
+}
+.qianbao {
+	background-image: url("https://xin.yiyunoto.com/uploads/static/shopcenter/topbg.png");
+	height: 270rpx;
+	margin: 20rpx;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.qianbao-top {
+	color: #333333;
+	margin: 25rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+}
+.qianbao-bottom {
+	padding-top: 30rpx;
+	color: #333333;
+	margin: 25rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+}
+.b {
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	font-size: 30rpx;
+	font-weight: 600;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+}
+.c {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	margin-top: 24rpx;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.zui {
+	background: #ffffff;
+	margin-left: 20rpx;
+	margin-right: 20rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	height: 104rpx;
+	border-bottom: 2rpx dashed #E6E6E6;
+}
+.edu {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+
+	font-size: 32rpx;
+
+	color: #333333;
+}
+.logo {
+
+	float: left;
+	width: 32rpx;
+	height: 36rpx;
+
+	margin: 30rpx;
+}
+.right {
+	width: 15rpx;
+	height: 28rpx;
+
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+}
+

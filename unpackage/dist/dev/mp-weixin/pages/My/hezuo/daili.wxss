@@ -1,0 +1,608 @@
+
+page{
+	background: #f5f5f5;
+}
+.place{
+	width: 16rpx;
+	height: 10rpx;
+	background: #FF502E;
+	-webkit-border-radius: 0px 100rpx 100rpx 0px;
+	        border-radius: 0px 100rpx 100rpx 0px;
+}
+.btn{
+	margin-top: 20rpx;
+	-webkit-border-radius: 16rpx;
+	        border-radius: 16rpx;
+	border: 1rpx solid #F32A27;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+	width: 260rpx;
+	color: #F32A27;
+	font-size: 30rpx;
+}
+.item{
+	font-size: 30rpx;
+	color: #333;
+	margin-left: 24rpx;
+	margin-right: 24rpx;
+	margin-top: 40rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	width: 702rpx;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	height: 223rpx;
+	background: #FFFFFF;
+	-webkit-box-shadow: 0px 0px 10rpx 0px rgba(0, 0, 0, 0.23);
+	        box-shadow: 0px 0px 10rpx 0px rgba(0, 0, 0, 0.23);
+	-webkit-border-radius: 16rpx;
+	        border-radius: 16rpx;
+}
+.home {
+	margin-top: 30rpx;
+	background: #f72926;
+	height: 60rpx;
+	text-align: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	font-size: 26rpx;
+	color: #ffffff;
+	width: 150rpx;
+	line-height: 60rpx;
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
+}
+.topNav {
+	width: 100%;
+	height: 99rpx;
+	background-color: #FFFFFF;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	
+	-webkit-box-align: center;
+	
+	-webkit-align-items: center;
+	
+	        align-items: center;
+}
+.navItem {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.navTitle {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	line-height: 95rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	text-align: center;
+	font-size: 30rpx;
+	color: #FF2B10;
+}
+.lastNavTitle {
+	font-size: 38rpx;
+	color: #999999;
+}
+.actionTitle {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	line-height: 95rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	text-align: center;
+	font-size: 30rpx;
+	color: #333;
+}
+.actionLinear {
+	width: 48rpx;
+	height: 4rpx;
+	background: #FF2B10;
+	-webkit-border-radius: 3rpx;
+	        border-radius: 3rpx;
+}
+.containerBox {
+	width: 100%;
+	position: absolute;
+	top: 8%;
+	background-color: #FFFFFF;
+	margin-top: 20rpx;
+}
+.shopContainer {
+	width: 100%;
+	border-bottom: 1rpx solid #f3f3f3;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	padding-bottom: 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	margin-top: 30rpx;
+}
+.topBox {
+	width: 100%;
+	height: 120rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	padding: 0 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.topLeft {
+	width: 10%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.selectedIcon {
+	width: 50rpx;
+	height: 50rpx;
+}
+.topRight {
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.shopHeadImg {
+	width: 100rpx;
+	height: 100rpx;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
+	margin-right: 20rpx;
+}
+.storeInfoBox {
+	width: 338rpx;
+	height: 100rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+}
+.shopName {
+	font-size: 32rpx;
+	font-weight: 600;
+	color: #000000;
+}
+.fenceNum {
+	font-size: 28rpx;
+	color: #999999;
+}
+.shopImgBox {
+	width: 100%;
+	height: 136rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	        justify-content: flex-start;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.shopimgs {
+	min-width: 117rpx;
+	max-width: 532rpx;
+	height: 100%;
+	background-color: #f8f8f8;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.shopImg {
+	width: 117rpx;
+	height: 117rpx;
+	margin: 0 10rpx;
+}
+.btmMenu {
+	width: 100%;
+	height: 150rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #FFFFFF;
+	z-index: 2;
+}
+.labe {
+	width: 30%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.btnBox {
+	width: 70%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.hint {
+	font-size: 28rpx;
+	color: #fb3923;
+	padding: 10rpx 20rpx;
+	background-color: #fee1de;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
+}
+/* 商品模块 */
+.attenShopBox {
+	width: 100%;
+	height: 92%;
+	position: absolute;
+	top: 8%;
+	z-index: 2;
+	padding: 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.shopItemBox {
+	width: 100%;
+	height: 24%;
+	background-color: #FFFFFF;
+	margin-bottom: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
+	padding: 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.shopInfoBox {
+	width: 100%;
+	height: 75%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	
+	-webkit-box-orient: horizontal;
+	
+	-webkit-box-direction: normal;
+	
+	-webkit-flex-direction: row;
+	
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	position: relative;
+}
+.shopInfoImg {
+	width: 160rpx;
+	height: 160rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
+}
+.shopInfoTxt {
+	width: 73%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+	margin-left: 2%;
+}
+.shopInfoName {
+	font-size: 30rpx;
+	color: #333333;
+	word-break: break-word; /*换行模式 */
+	overflow: hidden;
+	text-overflow: ellipsis; /*修剪文字 */
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /*此处为上限行数 */
+	-webkit-box-orient: vertical;
+}
+.priceBox {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: end;
+	-webkit-align-items: flex-end;
+	        align-items: flex-end;
+}
+.price {
+	font-size: 22rpx;
+	color: #fb4832;
+	font-weight: 700;
+}
+.btnsBox {
+	width: 100%;
+	height: 25%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.shopBtnBox {
+	width: 100%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: end;
+	-webkit-justify-content: flex-end;
+	        justify-content: flex-end;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.shopCancel {
+	font-size: 28rpx;
+	margin-right: 50rpx;
+	color: #333333;
+	border: 1rpx solid #999999;
+	background-color: #FFFFFF;
+	-webkit-border-radius: 50rpx;
+	        border-radius: 50rpx;
+	padding: 10rpx 20rpx;
+}
+.shopAddCart {
+	font-size: 28rpx;
+	color: #FFFFFF;
+	background-color: #fb4832;
+	-webkit-border-radius: 50rpx;
+	        border-radius: 50rpx;
+	padding: 10rpx 20rpx;
+}
+/* 浏览记录 */
+.browseBox {
+	width: 100%;
+	padding: 30rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	position: absolute;
+	top: 8%;
+}
+.everyDayBox {
+	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: start;
+	-webkit-align-items: flex-start;
+	        align-items: flex-start;
+	padding: 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.dateTxt {
+	font-size: 50rpx;
+	margin-bottom: 20rpx;
+}
+.browseShopBox {
+	width: 100%;
+	background-color: #FFFFFF;
+	padding: 20rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.browseShopBox:nth-child(2) {
+	-webkit-border-top-left-radius: 20rpx;
+	        border-top-left-radius: 20rpx;
+	-webkit-border-top-right-radius: 20rpx;
+	        border-top-right-radius: 20rpx;
+}
+.browseShopBox:last-child {
+	-webkit-border-bottom-left-radius: 20rpx;
+	        border-bottom-left-radius: 20rpx;
+	-webkit-border-bottom-right-radius: 20rpx;
+	        border-bottom-right-radius: 20rpx;
+}
+.browseShopBox:not(:first-child) {
+	border-top: 1rpx solid #F3F3F3;
+}
+.browseShopInfo {
+	width: 100%;
+	height: 160rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	position: relative;
+}
+.browseShopImg {
+	height: 160rpx;
+	width: 160rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
+}
+.browseShopTxtBox {
+	width: 70%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: start;
+	-webkit-align-items: flex-start;
+	        align-items: flex-start;
+}
+.browseShopName {
+	font-size: 30rpx;
+	color: #333333;
+	word-break: break-word; /*换行模式 */
+	overflow: hidden;
+	text-overflow: ellipsis; /*修剪文字 */
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /*此处为上限行数 */
+	-webkit-box-orient: vertical;
+}
+

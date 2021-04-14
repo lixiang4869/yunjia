@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "帮帮洗车",
+  "usingComponents": {
+    "xfl-select": "/components/xfl-select/xfl-select"
+  }
+}

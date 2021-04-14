@@ -1,0 +1,371 @@
+
+.header {
+	width: 100%;
+	
+}
+
+.tops{
+	position: fixed;
+	background: #ffffff;
+	z-index:9;
+	width: 100%;
+	
+	top:0upx ;
+	left:0upx ;
+	
+}
+.biaoti-one {
+		font-size: 30upx;
+		font-family: PingFangSC-Medium, PingFang SC;
+		color: #ffffff;
+	
+	}
+	.biaoti-two {
+			padding: 10rpx;
+			font-size: 30upx;
+			font-family: PingFangSC-Medium, PingFang SC;
+			color: #ffffff;
+		
+		}
+	.top {
+		width: 100%;
+		height: 580rpx;
+		
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		margin-top: var(--status-bar-height);
+		background: #fff;
+		border-radius: 0 0 46rpx 46rpx;
+		// background-image: linear-gradient(#F62F2A,#fb5643);
+		// background-color:  #F62F2A;
+		
+	}
+	
+	.titleTxtBox {
+		width: 100%;
+			
+		display: flex;
+		position: fixed;
+		top:0; 
+		left: 0;
+		z-index: 1;
+		flex-direction: column;
+		position: fixed;
+		padding-top: var(--status-bar-height);
+		align-items: center;
+		background: linear-gradient(135deg, #FF6178 0%, #FF502E 100%);
+		// background: #007AFF;
+	}
+	.titleTxtBox2 {
+		width: 100%;
+			
+		display: flex;
+		
+		flex-direction: column;
+		position: fixed;
+		padding-top: var(--status-bar-height);
+		align-items: center;
+		background: linear-gradient(135deg, #FF6178 0%, #FF502E 100%);
+		// background: #007AFF;
+	}
+.search-text {
+		margin-left: 20upx;
+		font-size: 28upx;
+		font-family: PingFangSC-Medium, PingFang SC;
+		color: #97A3B2;
+	
+	}
+ .status_bar {
+   background: #F62F2A;
+   height: var(--status-bar-height);  
+   width: 100%;
+  }
+  .locationimg {
+  	/* //第一行定位图片 */
+  	margin-left: 31upx;
+	margin-right: 20upx;
+  	width: 60upx;
+  	height: 60upx;
+  }
+  .search {
+
+  
+  	width: 28upx;
+  	height: 28upx;
+  }
+  .right {
+  	/* //第一行向右图片 */
+  	margin-left: 24upx;
+  
+  	width: 12upx;
+  	height: 12upx;
+  }
+.header-noe {
+	padding-bottom: 20rpx;
+	width: 100%;
+	flex-direction: row;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	
+
+}
+.all {
+	width: 100%;
+	flex-direction: column;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	
+
+}
+.header-two {
+	flex: 1;
+	
+	margin-right: 40rpx;
+	margin-left: 30upx;
+	padding-left: 20upx;
+	height: 60upx;
+	flex-direction: row;
+	display: flex;
+	border-radius: 10rpx;
+	justify-content: left;
+	align-items: center;
+	background: #ffffff;
+
+}
+
+.lunbo {
+	margin-top: 20rpx;
+	background: #fff;
+	padding: 20rpx;
+	border-top-left-radius: 23rpx;
+	border-top-right-radius: 23rpx;
+	// border-radius: 10rpx;
+	
+}
+/* // 图标区域 */
+.icon-all {
+	display: flex;
+	font-size: 24upx;
+	flex-wrap: wrap;
+	margin:34upx 46upx 20upx ;
+	.icon_text{
+		margin-bottom: 15upx;
+		margin-top: 15upx;
+		font-size: 26upx;
+		color: #333333;
+	}
+	.icon1:nth-child(5n){
+		margin-right: 0 !important;
+	}
+	.icon1 {
+	
+		width: 100upx;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin-right: 38upx;
+		>view:nth-child(1){
+			width: 86upx;
+			height: 86upx;
+			
+			image {
+				width: 100%;
+				height: 100%;
+			}
+		}
+		>view:nth-child(2){
+			// .if;
+			line-height: 32upx;
+			display: flex;
+			flex-wrap: nowrap;
+			text-align: center;
+			
+		}
+		
+	}
+}
+
+.redPack {
+	background-image: linear-gradient(#ffffff, #f4f4f4);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 29upx;
+	image {
+		width: 690upx;
+		height: 180upx;
+	}
+}
+.shopList {
+	width: 100%;
+	justify-content: left;
+	.titless {
+		flex-direction: row;
+		display: flex;
+		/* //距离销量评价 */
+		margin-left: 30upx;
+		.sort2 {
+			display: flex;
+			/* //点击时添加这个class
+			// margin-right: 84upx !important; */
+			color: #333333 !important;
+		}
+	}
+	.merchantAll{
+		width: 100%;
+		padding: 30rpx;
+		box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.shopItemBox{
+		
+		margin-bottom: 30rpx;
+		border-radius: 20rpx;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: #FFFFFF;
+	}
+	.shopTitle{
+		font-size: 30rpx;
+		color: #000000;
+		font-weight: 700;
+		padding: 0 20rpx;
+		box-sizing: border-box;
+		overflow: hidden;
+		word-break: break-all;  /* break-all(允许在单词内换行。) */
+		text-overflow: ellipsis;  /* 超出部分省略号 */
+		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		-webkit-line-clamp: 2; /** 显示的行数 **/
+	}
+	.shopImg{
+		width: 100%;
+		height: 300rpx;
+	}
+	.shopIntro{
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 20rpx;
+		box-sizing: border-box;
+	}
+	.number{
+		font-size: 26rpx;
+		color: #999999;
+	}
+	.rightIntro{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.text_txt{
+		padding: 5rpx 10rpx;
+		font-size: 22rpx;
+		color: #FFFFFF;
+		background-color: #fe1722;
+		border-radius: 10rpx;
+	}
+	.introPrice{
+		font-size: 26rpx;
+		color: #000;
+		margin-left: 10rpx;
+	}
+	.shopPrice{
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.nowPrice{
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: flex-end;
+	}
+	.nowPriceTxt{
+		font-size: 26rpx;
+		color: #fe1722;
+		font-weight: 700;
+	}
+	.nowPriceNum{
+		font-size: 34rpx;
+	}
+	.oldPrice{
+		font-size: 24rpx;
+		text-decoration: line-through;
+		color: #999999;
+		margin-left: 20rpx;
+	}
+	
+	.shopingInfo{
+		width: 48%;
+		margin-bottom: 20rpx;
+		background: #ffffff;
+		border-radius: 10rpx;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	
+	}
+	.shopNameInfo{
+		width: 100%;
+		margin-top: 20rpx;
+		display: flex;
+		flex-direction: column;
+		
+	}
+	.shopName{
+		font-size: 30rpx;
+		font-weight: 700;
+		color: #333333;
+		overflow: hidden;
+		word-break: break-all;  /* break-all(允许在单词内换行。) */
+		text-overflow: ellipsis;  /* 超出部分省略号 */
+		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		-webkit-line-clamp: 1; /** 显示的行数 **/
+	}
+	.fen{
+		margin-top: 20rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.fenNum{
+		font-size: 28rpx;
+		color: #fe1722;
+		font-weight: 700;
+		margin-left: 20rpx;
+	}
+	.marketHint{
+		margin-left: 28rpx;
+		font-size: 28rpx;
+		color: #333333;
+		flex: 1;
+	}
+	.shop_distance{
+		margin-right: 20rpx;
+		font-size: 28rpx;
+		color: #999999;
+	}
+	.sell{
+		margin-top: 20rpx;
+		margin-bottom: 20rpx;
+		font-size: 24rpx;
+		color: #333333;
+	
+	}
+}
+
+
