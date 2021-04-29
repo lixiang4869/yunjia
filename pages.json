@@ -13,7 +13,7 @@
 		},
 		{
 		
-			"path": "pages/My/hezuo/myhezuoList", //合伙人协议
+			"path": "pages/My/hezuo/myhezuoList", //我的合伙人列表
 			"style": {
 				"navigationBarTitleText":"我的合伙人"
 			}

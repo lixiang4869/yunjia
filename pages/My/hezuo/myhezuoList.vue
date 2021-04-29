@@ -23,6 +23,8 @@
 								<view class="user-img">
 									<image :src="item.headimg" mode=""></image>
 								</view>
+								
+								
 								<view class="user-name">{{item.truename}}</view>
 							</view>
 							<view class="user-bottom">
@@ -115,14 +117,17 @@
 		},
 		onLoad(){
 			this.gethehuoList()
+			console.log(this.url)
 		},
 		methods:{
 			gethehuoList(){
 				// let authtoken = uni.getStorageSync("authtoken");
+				// let authtoken = uni.getStorageSync("authtoken");
 				let authtoken = '85de366ff4b4210c1b3f1578defc16b25ac14146';
 				request.urlRequest(this.url+"/api/partner/myParent",{},{authtoken:authtoken},"POST",res=>{
 					res.data.data.data[0].type = '城市合伙人'
-					if(res.data.code == 1){
+					console.log(res)
+					if(res.data.data.data.length!=0){
 						this.dataList = res.data.data.data;
 						this.dataList1 = res.data.data.data;
 						this.dataList2 = res.data.data.data;
@@ -133,6 +138,8 @@
 						}else if(res.data.data.data[0].type == '黑卡合伙人'){
 							this.flag = 2
 						}
+					}else{
+						console.log(111)
 					}
 				})
 			},
@@ -140,18 +147,19 @@
 			
 			gohehuoDetail(index){
 				let id = this.dataList[index].id
+				// let authtoken = uni.getStorageSync("authtoken");
 				let authtoken = '85de366ff4b4210c1b3f1578defc16b25ac14146';
 				request.urlRequest(this.url+"/api/partner/myParent",{id:id},{authtoken:authtoken},"POST",res=>{
 					if(res.data.code == 1){
 						this.dataList1 = []
 						this.flag = 1
 						this.dataList1.push(res.data.data.data) ;
-						console.log(this.dataList1)
 					}
 				})
 			},
 			goheikaDetail(index){
 				let id = this.dataList1[index].id
+				// let authtoken = uni.getStorageSync("authtoken");
 				let authtoken = '85de366ff4b4210c1b3f1578defc16b25ac14146';
 				request.urlRequest(this.url+"/api/partner/myParent",{id:id},{authtoken:authtoken},"POST",res=>{
 					if(res.data.code == 1){
